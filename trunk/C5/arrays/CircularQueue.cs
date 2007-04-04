@@ -64,16 +64,16 @@ namespace C5
       T[] newarray = new T[newlength];
 
       if (front <= back)
-        Array.Copy(array, front, newarray, 0, size);
+        Array.Copy(array, front, newarray, 0, Size);
       else
       {
         int half = array.Length - front;
         Array.Copy(array, front, newarray, 0, half);
-        Array.Copy(array, 0, newarray, half, size - half);
+        Array.Copy(array, 0, newarray, half, Size - half);
       }
 
       front = 0;
-      back = size;
+      back = Size;
       array = newarray;
     }
 
@@ -116,7 +116,7 @@ namespace C5
     {
       get
       {
-        if (i < 0 || i >= size)
+        if (i < 0 || i >= Size)
           throw new IndexOutOfRangeException();
         i = i + front;
         //Bug fix by Steve Wallace 2006/02/10
@@ -134,9 +134,9 @@ namespace C5
     {
       if (!original)
         throw new ReadOnlyCollectionException();
-      stamp++;
-      if (size == array.Length - 1) expand();
-      size++;
+      Stamp++;
+      if (Size == array.Length - 1) expand();
+      Size++;
       int oldback = back++;
       if (back == array.Length) back = 0;
       array[oldback] = item;
@@ -153,10 +153,10 @@ namespace C5
     {
       if (!original)
         throw new ReadOnlyCollectionException("Object is a non-updatable clone");
-      stamp++;
-      if (size == 0)
+      Stamp++;
+      if (Size == 0)
         throw new NoSuchItemException();
-      size--;
+      Size--;
       int oldfront = front++;
       if (front == array.Length) front = 0;
       T retval = array[oldfront];
@@ -174,9 +174,9 @@ namespace C5
     {
       if (!original)
         throw new ReadOnlyCollectionException();
-      stamp++;
-      if (size == array.Length - 1) expand();
-      size++;
+      Stamp++;
+      if (Size == array.Length - 1) expand();
+      Size++;
       int oldback = back++;
       if (back == array.Length) back = 0;
       array[oldback] = item;
@@ -192,10 +192,10 @@ namespace C5
     {
       if (!original)
         throw new ReadOnlyCollectionException("Object is a non-updatable clone");
-      stamp++;
-      if (size == 0)
+      Stamp++;
+      if (Size == 0)
         throw new NoSuchItemException();
-      size--;
+      Size--;
       back--;
       if (back == -1) back = array.Length - 1;
       T retval = array[back];
@@ -225,7 +225,7 @@ namespace C5
     [Tested]
     public override T Choose()
     {
-      if (size == 0)
+      if (Size == 0)
         throw new NoSuchItemException();
       return array[front];
     }
@@ -240,14 +240,14 @@ namespace C5
     /// <returns></returns>
     public override SCG.IEnumerator<T> GetEnumerator()
     {
-      int stamp = this.stamp;
+      int stamp = this.Stamp;
       if (forwards)
       {
         int position = front;
         int end = front <= back ? back : array.Length;
         while (position < end)
         {
-          if (stamp != this.stamp)
+          if (stamp != this.Stamp)
             throw new CollectionModifiedException();
           yield return array[position++];
         }
@@ -256,7 +256,7 @@ namespace C5
           position = 0;
           while (position < back)
           {
-            if (stamp != this.stamp)
+            if (stamp != this.Stamp)
               throw new CollectionModifiedException();
             yield return array[position++];
           }
@@ -268,7 +268,7 @@ namespace C5
         int end = front <= back ? front : 0;
         while (position >= end)
         {
-          if (stamp != this.stamp)
+          if (stamp != this.Stamp)
             throw new CollectionModifiedException();
           yield return array[position--];
         }
@@ -277,7 +277,7 @@ namespace C5
           position = array.Length - 1;
           while (position >= front)
           {
-            if (stamp != this.stamp)
+            if (stamp != this.Stamp)
               throw new CollectionModifiedException();
             yield return array[position--];
           }
@@ -323,10 +323,10 @@ namespace C5
     public virtual bool Check()
     {
       if (front < 0 || front >= array.Length || back < 0 || back >= array.Length ||
-          (front <= back && size != back - front) || (front > back && size != array.Length + back - front))
+          (front <= back && Size != back - front) || (front > back && Size != array.Length + back - front))
       {
         Console.WriteLine("Bad combination of (front,back,size,array.Length): ({0},{1},{2},{3})",
-            front, back, size, array.Length);
+            front, back, Size, array.Length);
         return false;
       }
       return true;

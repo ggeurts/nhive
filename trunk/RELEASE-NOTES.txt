@@ -1,6 +1,67 @@
 RELEASE NOTES FOR C5 GENERIC COLLECTION LIBRARY FOR C#/CLI
 ------------------------------
 
+Release 2.0.0-alpha1 of 2007-01-17 by:
+	Gerke Geurts (ggeurts@ge2.co.uk), 
+	Ge2 Consultancy/AGG Solutions VOF
+
+BREAKING CHANGES
+
+Removed dependencies on C5.KeyValuePair<T,int>, because we want to use  
+System.Collections.Generic.KeyValuePair<K,V> instead to simplify implementation 
+of the System.Collecions.Generic.IDictionary<K,V> interface on all C5 dictionaries.
+
+Breaking changes in ICollection<T> interface, to remove dependency on deprecated 
+C5.KeyValuePair<T,int> by using the more descriptive C5.Multiplicity<T> instead
+for the registration of object multiplicities. 
+ * ICollectionValue<KeyValuePair<T, int>> ItemMultiplicities()	
+	=> ICollectionValue<Multiplicity<T>> ItemMultiplicities()
+
+Breaking changes in IDictionary<K,V> interface to remove dependency on deprecated 
+C5.KeyValuePair<T,int>:
+ * IDictionary<K, V> : ICollectionValue<KeyValuePair<K, V>>, ICloneable
+	=> IDictionary<K, V> : ICollectionValue<SCG.KeyValuePair<K, V>>, ICloneable
+ * void AddAll<U, W>(SCG.IEnumerable<KeyValuePair<U, W>> entries)	
+	=> void AddAll<U, W>(SCG.IEnumerable<SCG.KeyValuePair<U, W>> entries)
+
+IDictionary<K,V> interface methods renamed to create consistency with 
+System.Collections.Generic.IDictionary interface:
+ * bool Contains(K key)						=> bool ContainsKey(K key)
+ * bool Find(K key, out V value)			=> bool TryGetValue(K key, out V value)
+ 
+IDictionary<K,V> interface method removed to ensure CLS compliance:
+ * bool Find(ref K key, out V val)			=> <removed from interface>
+
+Breaking changes in ISortedDictionary<K,V> interface to remove dependency on deprecated 
+C5.KeyValuePair<T,int> and use SCG.KeyValuePair<K,V> instead:
+ * KeyValuePair<K, V> FindMin()				=> SCG.KeyValuePair<K, V> FindMin()
+ * KeyValuePair<K, V> DeleteMin()			=> SCG.KeyValuePair<K, V> DeleteMin()
+ * KeyValuePair<K, V> FindMax()				=> SCG.KeyValuePair<K, V> FindMax()
+ * KeyValuePair<K, V> DeleteMax()			=> SCG.KeyValuePair<K, V> DeleteMax()
+ * KeyValuePair<K, V> Predecessor(K key)	=> SCG.KeyValuePair<K, V> Predecessor(K key)
+ * KeyValuePair<K, V> Successor(K key)		=> SCG.KeyValuePair<K, V> Successor(K key)
+ * KeyValuePair<K, V> WeakPredecessor(K key)=> SCG.KeyValuePair<K, V> WeakPredecessor(K key)
+ * KeyValuePair<K, V> WeakSuccessor(K key)	=> SCG.KeyValuePair<K, V> WeakSuccessor(K key)
+ * bool Cut(IComparable<K> f, out KeyValuePair<K, V> lowEntry, ...)
+	=> bool Cut(IComparable<K> f, out SCG.KeyValuePair<K, V> lowEntry, ...)
+ * IDirectedEnumerable<KeyValuePair<K, V>> RangeFrom(K bot) 
+	=> IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeFrom(K bottom)
+ * IDirectedEnumerable<KeyValuePair<K, V>> RangeFromTo(K lowerBound, K upperBound)
+	=> IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeFromTo(K lowerBound, K upperBound);
+ * IDirectedEnumerable<KeyValuePair<K, V>> RangeTo(K top)
+	=> IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeTo(K top);
+ * IDirectedCollectionValue<KeyValuePair<K, V>> RangeAll()
+	=> IDirectedCollectionValue<SCG.KeyValuePair<K, V>> RangeAll()
+ *  void AddSorted(SCG.IEnumerable<KeyValuePair<K, V>> items)
+	=> void AddSorted(SCG.IEnumerable<SCG.KeyValuePair<K, V>> items)
+
+NEW FEATURES
+       
+DictionaryBase<K, V> now implements SCG.IDictionary<K,V> as well as C5.IDictionary<K,V>.
+
+
+------------------------------
+
 Release 1.0.1 of 2006-06-27
 
 Bugs fixed:

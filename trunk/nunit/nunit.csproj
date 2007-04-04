@@ -58,6 +58,7 @@
     <Compile Include="BasesTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="linkedlists\HashedLinkedListTest.cs" />
     <Compile Include="Records.cs" />
     <Compile Include="Sorting.cs">
       <SubType>Code</SubType>
@@ -84,9 +85,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="heaps\HeapTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="linkedlists\HashedLinkedListTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="linkedlists\LinkedListTest.cs">

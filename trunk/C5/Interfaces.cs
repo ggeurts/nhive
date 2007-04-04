@@ -352,7 +352,7 @@ namespace C5
     /// 
     /// </summary>
     /// <returns></returns>
-    ICollectionValue<KeyValuePair<T, int>> ItemMultiplicities();
+    ICollectionValue<Multiplicity<T>> ItemMultiplicities();
 
     /// <summary>
     /// Check whether this collection contains all the values in another collection.
@@ -1462,7 +1462,7 @@ namespace C5
   /// A dictionary with keys of type K and values of type V. Equivalent to a
   /// finite partial map from K to V.
   /// </summary>
-  public interface IDictionary<K, V> : ICollectionValue<KeyValuePair<K, V>>, ICloneable
+  public interface IDictionary<K, V> : ICollectionValue<SCG.KeyValuePair<K, V>>, ICloneable
   {
     /// <summary>
     /// The key equalityComparer.
@@ -1520,7 +1520,7 @@ namespace C5
     /// <exception cref="DuplicateNotAllowedException"> 
     /// If the input contains duplicate keys or a key already present in this dictionary.</exception>
     /// <param name="entries"></param>
-    void AddAll<U, W>(SCG.IEnumerable<KeyValuePair<U, W>> entries)
+    void AddAll<U, W>(SCG.IEnumerable<SCG.KeyValuePair<U, W>> entries)
         where U : K
         where W : V
       ;
@@ -1573,17 +1573,7 @@ namespace C5
     /// </summary>
     /// <param name="key">The key to look for</param>
     /// <returns>True if key was found</returns>
-    bool Contains(K key);
-
-
-    /// <summary>
-    /// Check if there is an entry with a specified key and report the corresponding
-    /// value if found. This can be seen as a safe form of "val = this[key]".
-    /// </summary>
-    /// <param name="key">The key to look for</param>
-    /// <param name="val">On exit, the value of the entry</param>
-    /// <returns>True if key was found</returns>
-    bool Find(K key, out V val);
+    bool ContainsKey(K key);
 
     /// <summary>
     /// Check if there is an entry with a specified key and report the corresponding
@@ -1592,8 +1582,7 @@ namespace C5
     /// <param name="key">The key to look for</param>
     /// <param name="val">On exit, the value of the entry</param>
     /// <returns>True if key was found</returns>
-    bool Find(ref K key, out V val);
-
+    bool TryGetValue(K key, out V val);
 
     /// <summary>
     /// Look for a specific key in the dictionary and if found replace the value with a new one.
@@ -1603,7 +1592,6 @@ namespace C5
     /// <param name="val">The new value</param>
     /// <returns>True if key was found</returns>
     bool Update(K key, V val);          //no-adding				    	
-
 
     /// <summary>
     /// Look for a specific key in the dictionary and if found replace the value with a new one.
@@ -1673,7 +1661,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
     /// <returns>The least item.</returns>
-    KeyValuePair<K, V> FindMin();
+    SCG.KeyValuePair<K, V> FindMin();
 
 
     /// <summary>
@@ -1681,7 +1669,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
     /// <returns>The removed item.</returns>
-    KeyValuePair<K, V> DeleteMin();
+    SCG.KeyValuePair<K, V> DeleteMin();
 
 
     /// <summary>
@@ -1689,7 +1677,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
     /// <returns>The largest item.</returns>
-    KeyValuePair<K, V> FindMax();
+    SCG.KeyValuePair<K, V> FindMax();
 
 
     /// <summary>
@@ -1697,7 +1685,7 @@ namespace C5
     /// </summary>
     /// <exception cref="NoSuchItemException"> if the collection is empty.</exception>
     /// <returns>The removed item.</returns>
-    KeyValuePair<K, V> DeleteMax();
+    SCG.KeyValuePair<K, V> DeleteMax();
 
     /// <summary>
     /// The key comparer used by this dictionary.
@@ -1711,7 +1699,7 @@ namespace C5
     /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
     /// <param name="key">The key to compare to</param>
     /// <returns>The entry</returns>
-    KeyValuePair<K, V> Predecessor(K key);
+    SCG.KeyValuePair<K, V> Predecessor(K key);
 
 
     /// <summary>
@@ -1720,7 +1708,7 @@ namespace C5
     /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
     /// <param name="key">The key to compare to</param>
     /// <returns>The entry</returns>
-    KeyValuePair<K, V> Successor(K key);
+    SCG.KeyValuePair<K, V> Successor(K key);
 
 
     /// <summary>
@@ -1729,7 +1717,7 @@ namespace C5
     /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
     /// <param name="key">The key to compare to</param>
     /// <returns>The entry</returns>
-    KeyValuePair<K, V> WeakPredecessor(K key);
+    SCG.KeyValuePair<K, V> WeakPredecessor(K key);
 
 
     /// <summary>
@@ -1738,7 +1726,7 @@ namespace C5
     /// <exception cref="NoSuchItemException"> if there is no such entry. </exception>
     /// <param name="key">The key to compare to</param>
     /// <returns>The entry</returns>
-    KeyValuePair<K, V> WeakSuccessor(K key);
+    SCG.KeyValuePair<K, V> WeakSuccessor(K key);
 
     /// <summary>
     /// Given a "cut" function from the items of the sorted collection to <code>int</code>
@@ -1777,7 +1765,7 @@ namespace C5
     /// on this collection.</param>
     /// <returns>True if the cut function is zero somewhere
     /// on this collection.</returns>
-    bool Cut(IComparable<K> cutFunction, out KeyValuePair<K, V> lowEntry, out bool lowIsValid, out KeyValuePair<K, V> highEntry, out bool highIsValid);
+    bool Cut(IComparable<K> cutFunction, out SCG.KeyValuePair<K, V> lowEntry, out bool lowIsValid, out SCG.KeyValuePair<K, V> highEntry, out bool highIsValid);
 
     /// <summary>
     /// Query this sorted collection for items greater than or equal to a supplied value.
@@ -1787,7 +1775,7 @@ namespace C5
     /// </summary>
     /// <param name="bot">The lower bound (inclusive).</param>
     /// <returns>The result directed collection.</returns>
-    IDirectedEnumerable<KeyValuePair<K, V>> RangeFrom(K bot);
+    IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeFrom(K bot);
 
 
     /// <summary>
@@ -1799,7 +1787,7 @@ namespace C5
     /// <param name="lowerBound">The lower bound (inclusive).</param>
     /// <param name="upperBound">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    IDirectedEnumerable<KeyValuePair<K, V>> RangeFromTo(K lowerBound, K upperBound);
+    IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeFromTo(K lowerBound, K upperBound);
 
 
     /// <summary>
@@ -1810,7 +1798,7 @@ namespace C5
     /// </summary>
     /// <param name="top">The upper bound (exclusive).</param>
     /// <returns>The result directed collection.</returns>
-    IDirectedEnumerable<KeyValuePair<K, V>> RangeTo(K top);
+    IDirectedEnumerable<SCG.KeyValuePair<K, V>> RangeTo(K top);
 
 
     /// <summary>
@@ -1820,7 +1808,7 @@ namespace C5
     /// invalidate the view so that further operations on the view throws InvalidView exceptions.</para>
     /// </summary>
     /// <returns>The result directed collection.</returns>
-    IDirectedCollectionValue<KeyValuePair<K, V>> RangeAll();
+    IDirectedCollectionValue<SCG.KeyValuePair<K, V>> RangeAll();
 
 
     //TODO: remove now that we assume that we can check the sorting order?
@@ -1831,7 +1819,7 @@ namespace C5
     /// <exception cref="ArgumentException"> if the enumerated items turns out
     /// not to be in increasing order.</exception>
     /// <param name="items">The collection to add.</param>
-    void AddSorted(SCG.IEnumerable<KeyValuePair<K, V>> items);
+    void AddSorted(SCG.IEnumerable<SCG.KeyValuePair<K, V>> items);
 
 
     /// <summary>

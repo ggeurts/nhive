@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>c5.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,6 +50,8 @@
   <ItemGroup>
     <Reference Include="System">
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="arrays\CircularQueue.cs" />
@@ -62,6 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Delegates.cs" />
+    <Compile Include="Multiplicities.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Formatting.cs" />
@@ -69,10 +73,10 @@
     <Compile Include="Events.cs" />
     <Compile Include="Collections.cs">
     </Compile>
-    <Compile Include="Dictionaries.cs">
-    </Compile>
     <Compile Include="Interfaces.cs">
     </Compile>
+    <Compile Include="Dictionaries.cs" />
+    <Compile Include="KeyValuePairs.cs" />
     <Compile Include="linkedlists\HashedLinkedList.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Records.cs" />

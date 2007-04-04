@@ -86,7 +86,7 @@ namespace DocNet
       XmlNode n;
       //xml.SelectSingleNode(xpath);
 
-      if (cachedDocComments.Find(xpath, out n))
+      if (cachedDocComments.TryGetValue(xpath, out n))
       {
         foreach (XmlNode child in n.ChildNodes)
           p.AppendChild(ret.ImportNode(child, true));
@@ -545,7 +545,7 @@ namespace DocNet
       if (retval.StartsWith(defaultNamespace + "."))
         retval = retval.Substring(defaultNamespace.Length + 1);
 
-      if (longtype2short.Contains(retval))
+      if (longtype2short.ContainsKey(retval))
         retval = longtype2short[retval];
 
       return retval;

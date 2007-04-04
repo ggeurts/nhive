@@ -36,12 +36,12 @@ namespace C5UnitTests.support
       {
         public ABT() : base(8,NaturalEqualityComparer<string>.Default) { }
 
-        public override string Choose() { if (size > 0) return array[0]; throw new NoSuchItemException(); }
+        public override string Choose() { if (Size > 0) return array[0]; throw new NoSuchItemException(); }
 
         public string this[int i] { get { return array[i]; } set { array[i] = value; } }
 
 
-        public int thesize { get { return size; } set { size = value; } }
+        public int thesize { get { return Size; } set { Size = value; } }
       }
 
 

@@ -227,16 +227,16 @@ namespace ViewPatterns {
 
     // Replace the first occurrence of each x from xs by y in list:
     
-    public static void ReplaceXsByY<T>(HashedLinkedList<T> list, T[] xs, T y) {
-      foreach (T x in xs) {
-        using (IList<T> view = list.ViewOf(x)) {
-          if (view != null) { 
-            view.Remove();
-            view.Add(y);
-          }
-        }
-      }
-    }
+    //public static void ReplaceXsByY<T>(HashedLinkedList<T> list, T[] xs, T y) {
+    //  foreach (T x in xs) {
+    //    using (IList<T> view = list.ViewOf(x)) {
+    //      if (view != null) { 
+    //        view.Remove();
+    //        view.Add(y);
+    //      }
+    //    }
+    //  }
+    //}
 
     // Get index in underlying list of view's left end
     
