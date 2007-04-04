@@ -1,0 +1,25 @@
+A summary of what we consider doing with the C5 Collections:
+  * Refactor the current codebase
+    * Split the 3 files that are compiled twice using different conditional defines into individual files to benefit from refactoring support (by VS.NET 2005 for example).
+    * Concentrate common functionality into base classes
+  * Separate essential and non-essential functionality. Create core collection implementations that can be extended/decorated with additional functionality:
+    * Views/windows over collections
+    * Events
+    * Algorithms for searching, sorting, etc.
+  * Support relevent .NET collection interface (IList, ICollection, IDictionary, IList<T>, ICollection<T>, IDictionary<T>)
+  * Consider support for STL-like iterators and associated algorithms (see [http://sourceforge.net/projects/cstl CSTL] project on sourceforge)
+  * Add new collection types (skip lists for example) 
+
+We would like to maintain the interface centred design of the C5 collections, but suspect that the existing interfaces can be simplified. The implication is that backward compatibility will not be a design goal. Or to be more truthful, we expect the result to deviate substantially from the current C5 implementation, though the core collection implementations and the overall functionality should still be present in the final result.
+
+When it comes to design and coding guidelines we would consider using Microsoft's .NET framework design guidelines and borrowing [http://www.wintellect.com/cs/blogs/pgolde/archive/2005/06/08/nomenclature-and-new-methods-in-algorithms.aspx Peter Golde's naming conventions for PowerCollections].
+
+
+
+
+
+
+
+
+
+
