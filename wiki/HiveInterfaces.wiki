@@ -1,0 +1,10 @@
+#summary NHive collection interface definitions.
+#labels Phase-Design
+
+= Introduction =
+
+Like the C5 collections NHive will follow an interface centric approach. This page will document the NHive collection interfaces, including how they relate to the orginal C5 collection interfaces.
+
+= Details =
+
+_*Todo:* Insert tables with C5 collection interfaces to kick off interface (re-)design process._
