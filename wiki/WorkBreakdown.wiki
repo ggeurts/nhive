@@ -1,0 +1,20 @@
+#summary Work breakdown for NHive collection development
+#labels Planning,Phase-Requirements
+
+ # NHive collection design:
+  * Interface redesign;
+  * Evaluate extensibility mechanism options;
+  * CSTL iterator integration;
+  * Evaluate LINQ support.
+ # Test design:
+  * Create generic unit tests for each interface; 
+  * Port from existing C5 unit tests.
+ # Port C5 collection classes one-by-one to their NHive equivalents:
+  * Strip excessive functionality from the core collections (views, algorithms);
+  * Implement new interfaces.
+ # Implement generic algorithms.
+  * Preferably straight port of CSTL algorithms.
+ # Implement collection extension services
+  * Views
+  * What else?
+ # Documentation
