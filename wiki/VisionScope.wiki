@@ -10,7 +10,10 @@ The main reason to start a new collection project is the lack of a .NET collecti
  *Supports the .NET collection interfaces as much as possible;
  *Has a liberal license, which for example allows use with Mono.
 
-=C5 collections refactoring=
+=Approach=
+The NHive collection library will use the C5 Collections as a starting point. We like the clean design and features of this library, but believe that the concrete realisation of both can be improved and made more "palatable" to main-stream .NET developers.
+
+==C5 collections refactoring==
 A summary of what we consider doing with the C5 Collections:
   * Refactor the current codebase
     * Split the 3 files that are compiled twice using different conditional defines into individual files to benefit from refactoring support (by VS.NET 2005 for example).
@@ -23,8 +26,8 @@ A summary of what we consider doing with the C5 Collections:
   * Consider support for STL-like iterators and associated algorithms (see [http://sourceforge.net/projects/cstl CSTL] project on sourceforge)
   * Add new collection types (skip lists for example) 
 
-=Design principles=
+==Design principles==
 We would like to maintain the interface centred design of the C5 collections, but suspect that the existing interfaces can be simplified. The implication is that backward compatibility will not be a design goal. Or to be more truthful, we expect the result to deviate substantially from the current C5 implementation, though the core collection implementations and the overall functionality should still be present in the final result.
 
-=Coding guidelines=
+==Coding guidelines==
 When it comes to design and coding guidelines we would consider using Microsoft's .NET framework design guidelines and borrowing [http://www.wintellect.com/cs/blogs/pgolde/archive/2005/06/08/nomenclature-and-new-methods-in-algorithms.aspx Peter Golde's naming conventions for PowerCollections].
