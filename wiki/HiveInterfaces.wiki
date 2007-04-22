@@ -12,27 +12,24 @@ _*Todo:* Insert tables with C5 collection interfaces to kick off interface (re-)
 ==ICollectionValue<T>==
 A generic collection that may be enumerated and can answer efficiently how many items it contains. Like `IEnumerable<T>`, this interface does not prescribe any operations to initialize or update the collection. The main usage for this interface is to be the return type of query operations on generic collection.
 
-|| *C5 Signature* || *NHive Signature* || *Description* ||
-||`EventTypeEnum ListenableEvents { get;}`|| ||A flag bitmap of the events subscribable to by this collection.||
-||`EventTypeEnum ActiveEvents { get;}`|| ||A flag bitmap of the events currently subscribed to by this collection.||
-||`event CollectionChangedHandler<T> CollectionChanged;`|| ||The change event. Will be raised for every change operation on the collection.||
-||`event CollectionClearedHandler<T> CollectionCleared;`|| ||The change event. Will be raised for every clear operation on the collection.||
-||`event ItemsAddedHandler<T> ItemsAdded;`|| ||The item added  event. Will be raised for every individual addition to the collection.||
-||`event ItemInsertedHandler<T> ItemInserted;`|| ||The item inserted  event. Will be raised for every individual insertion to the collection.||
-||`event ItemsRemovedHandler<T> ItemsRemoved;`|| ||The item removed event. Will be raised for every individual removal from the collection.||
-||`event ItemRemovedAtHandler<T> ItemRemovedAt;`|| ||The item removed at event. Will be raised for every individual removal at from the collection.||
-||`bool IsEmpty { get;}`|| ||True if this collection is empty.||
-||`int Count { get;}`|| ||The number of items in this collection</value>||
-||`Speed CountSpeed { get;}`|| ||A characterization of the speed of the `Count` property in this collection.||
-||`void CopyTo(T[] array, int index);`|| ||Copy the items of this collection to a contiguous part of an array.||
-||`T[] ToArray();`|| ||Create an array with the items of this collection (in the same order as an enumerator would output them).||
-||`void Apply(Act<T> action);`|| ||Apply a delegate to all items of this collection.||
-||`bool Exists(Fun<T, bool> predicate);`|| ||Check if there exists an item  that satisfies a specific predicate in this collection.||
-||`bool Find(Fun<T, bool> predicate, out T item);`|| ||Check if there exists an item  that satisfies a specific predicate in this collection and return the first one in enumeration order.||
-||`bool All(Fun<T, bool> predicate);`|| ||Check if all items in this collection satisfies a specific predicate.||
-||`T Choose();`|| ||Choose some item of this collection.`||
-||`SCG.IEnumerable<T> Filter(Fun<T, bool> filter);`|| ||Enumerate the items of this collection that satisfy a certain condition.||
-
-
-
+|| *C5.ICollectionValue<T>* || *NHive.IHive<T>* || *Category* || *Comments* ||
+|| `EventTypeEnum ListenableEvents { get;}` || || meta || Subscribable events. ||
+|| `EventTypeEnum ActiveEvents { get;}` || || events || Subscribed events. ||
+|| `event CollectionChangedHandler<T> CollectionChanged;` || || events || Raised for every change. ||
+|| `event CollectionClearedHandler<T> CollectionCleared;` || || events || Raised for every clear. ||
+|| `event ItemsAddedHandler<T> ItemsAdded;` || || events || Raised for every individual addition. ||
+|| `event ItemInsertedHandler<T> ItemInserted;` || || events || Raised for every individual insertion.||
+|| `event ItemsRemovedHandler<T> ItemsRemoved;` || || events || Raised for every individual removal. ||
+|| `event ItemRemovedAtHandler<T> ItemRemovedAt;` || || events || Raised for every individual removal at specific index. ||
+|| `bool IsEmpty { get;}` || `bool IsEmpty { get;}` || core || ||
+|| `int Count { get;}` || `int Count { get;}` || core ||  ||
+|| `Speed CountSpeed { get;}` || || meta || e.g. linear, logarithmic, etc. ||
+|| `void CopyTo(T[] array, int index);` || `void CopyTo(T[] array, int index);` || core ||  ||
+|| `T[] ToArray();` || `T[] ToArray();` || core ||  ||
+|| `void Apply(Act<T> action);` || || algorithm ||  ||
+|| `bool Exists(Fun<T, bool> predicate);` || || algorithm ||  ||
+|| `bool Find(Fun<T, bool> predicate, out T item);` || || algorithm || Returns first matching item. ||
+|| `bool All(Fun<T, bool> predicate);` || || algorithm ||  ||
+|| `T Choose();`|| || algorithm || Returns arbitrary item.` ||
+|| `SCG.IEnumerable<T> Filter(Fun<T, bool> filter);` || || algorithm || ||
 
