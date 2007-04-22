@@ -49,4 +49,3 @@ A generic collection to which one may add items. This is just the intersection o
 || `void AddAll<U>(SCG.IEnumerable<U> items) where U : T;` || || algorithm || Adds items from another collection with more specialized item type. If this collection has set semantics, only items not already in the collection will be added. ||
 || `bool Check();` || || invariant || Invariant check intended for development purposes ||
 
-
