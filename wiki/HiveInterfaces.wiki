@@ -37,4 +37,14 @@ A generic collection that may be enumerated and can answer efficiently how many 
 A sized generic collection, that can be enumerated backwards.
 || *C5* || *NHive* || *Category* || *Comments* ||
 || `IDirectedCollectionValue<T> Backwards();` || || enumeration || ||
-|| `bool FindLast(Fun<T, bool> predicate, out T item);` || || ||
+|| `bool FindLast(Fun<T, bool> predicate, out T item);` || || algorithm || ||
+
+==IExtensible<T>==
+A generic collection to which one may add items. This is just the intersection of the main stream generic collection interfaces and the priority queue interface.
+|| *C5* || *NHive* || *Category* || *Comments* ||
+|| `bool AllowsDuplicates { get;}` || || meta || true = set semantics; false = bag semantics ||
+|| `SCG.IEqualityComparer<T> EqualityComparer { get;}` || || meta || EqualityComparer used to check equality of items. Or null (????) if collection does not check equality at all or uses a comparer. ||
+|| `bool DuplicatesByCounting { get;}` || || meta || True if only one representative of a group of equal items is kept in the collection together with the total count. ||
+|| `bool Add(T item);` || `bool Add(T item);` || core || Attempts to add an item. If collection has set semantics, the item will be added if not already present. If bag semantics, the item will always be added. ||
+|| `void AddAll<U>(SCG.IEnumerable<U> items) where U : T;` || || algorithm || Adds items from another collection with more specialized item type. If this collection has set semantics, only items not already in the collection will be added. ||
+|| `bool Check();` || || invariant || Invariant check intended for development purposes ||
