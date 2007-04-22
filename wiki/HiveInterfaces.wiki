@@ -12,7 +12,7 @@ _*Todo:* Insert tables with C5 collection interfaces to kick off interface (re-)
 ==ICollectionValue<T>==
 A generic collection that may be enumerated and can answer efficiently how many items it contains. Like `IEnumerable<T>`, this interface does not prescribe any operations to initialize or update the collection. The main usage for this interface is to be the return type of query operations on generic collection.
 
-|| *C5.ICollectionValue<T>* || *NHive.IHive<T>* || *Category* || *Comments* ||
+|| *C5* || *NHive* || *Category* || *Comments* ||
 || `EventTypeEnum ListenableEvents { get;}` || || meta || Subscribable events. ||
 || `EventTypeEnum ActiveEvents { get;}` || || events || Subscribed events. ||
 || `event CollectionChangedHandler<T> CollectionChanged;` || || events || Raised for every change. ||
@@ -33,3 +33,8 @@ A generic collection that may be enumerated and can answer efficiently how many 
 || `T Choose();`|| || algorithm || Returns arbitrary item.` ||
 || `SCG.IEnumerable<T> Filter(Fun<T, bool> filter);` || || algorithm || ||
 
+==IDirectedCollectionValue<T>==
+A sized generic collection, that can be enumerated backwards.
+|| *C5* || *NHive* || *Category* || *Comments* ||
+|| `IDirectedCollectionValue<T> Backwards();` || || enumeration || ||
+|| `bool FindLast(Fun<T, bool> predicate, out T item);` || || ||
