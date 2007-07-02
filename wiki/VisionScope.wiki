@@ -6,9 +6,9 @@ The NHive Collection library will be a comprehensive set of generic .NET collect
 
 =Motivation=
 The main reason to start a new collection project is the lack of a .NET collection library that:
- *Provides a comprehensive set of generic .NET collections;
- *Supports the .NET collection interfaces as much as possible;
- *Has a liberal license, which for example allows use with Mono.
+ * Provides a comprehensive set of generic .NET collections;
+ * Supports the .NET collection interfaces as much as possible;
+ * Has a liberal license, which for example allows use with Mono.
 
 =Approach=
 The NHive collection library will use the C5 Collections as a starting point. We like the clean design and features of this library, but believe that the concrete realisation of both can be improved and made more "palatable" to main-stream .NET developers.
