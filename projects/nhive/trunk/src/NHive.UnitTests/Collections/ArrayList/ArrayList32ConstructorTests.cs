@@ -1,5 +1,8 @@
 namespace NHive.UnitTests
 {
+    using System;
+    using MbUnit.Framework;
+
     [TestFixture]
     public class ArrayList32ConstructorTests
     {

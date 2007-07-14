@@ -1,5 +1,10 @@
 namespace NHive.UnitTests
 {
+    using System;
+    using NHive.Base.Size;
+    using MbUnit.Framework;
+    using NHive.UnitTests;
+
     [TypeFixture(
         typeof(ArrayList32TestArgs<string>))]
     [ProviderFactory(

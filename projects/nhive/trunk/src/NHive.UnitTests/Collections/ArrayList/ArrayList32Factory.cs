@@ -1,5 +1,7 @@
-namespace NHive.UnitTests.Factories
+namespace NHive.UnitTests
 {
+    using MbUnit.Framework;
+
     internal class ArrayList32Factory
     {
         [Factory]
