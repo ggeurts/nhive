@@ -37,7 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayListTests.cs" />
+    <Compile Include="Collections\ArrayListTests.cs" />
     <Compile Include="BaseClasses\ListTestsBase.cs" />
     <Compile Include="BaseClasses\BufferedHiveTestsBase.cs" />
     <Compile Include="BaseClasses\ForwardIteratableTestsBase.cs" />
@@ -56,6 +56,9 @@
       <Project>{B6782BD5-AC5B-4C11-8E2B-53A19C47DC6D}</Project>
       <Name>NHive</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collections\ArrayList\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
