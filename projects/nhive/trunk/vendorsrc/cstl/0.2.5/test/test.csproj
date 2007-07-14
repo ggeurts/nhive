@@ -1,0 +1,114 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{651AD78F-7F61-4F5C-997D-9DEF075F298E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSTL.Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+    <ReferencePath>.\lib\NUnit-2.2.8-net-2.0\</ReferencePath>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NUnit-2.2.8-net-2.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithm\BaseIntTest.cs" />
+    <Compile Include="Algorithm\BaseStringTest.cs" />
+    <Compile Include="Algorithm\Modifying\CopyBackwardTest_Int.cs" />
+    <Compile Include="Algorithm\Modifying\CopyBackwardTest_String.cs" />
+    <Compile Include="Algorithm\Modifying\CopyTest_Int.cs" />
+    <Compile Include="Algorithm\Modifying\CopyTest_String.cs" />
+    <Compile Include="Algorithm\Modifying\FillNTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\FillTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\GenerateNTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\GenerateTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\MergeTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\ReplaceCopyTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\ReplaceIfTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\ReplaceTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\SwapRangesTest_int.cs" />
+    <Compile Include="Algorithm\Modifying\TransformTest_int.cs" />
+    <Compile Include="Algorithm\Mutating\NextPermutationTest.cs" />
+    <Compile Include="Algorithm\Mutating\PrevPermutationTest.cs" />
+    <Compile Include="Algorithm\Mutating\RandomShuffleTest.cs" />
+    <Compile Include="Algorithm\Mutating\ReverseCopyTest_int.cs" />
+    <Compile Include="Algorithm\Mutating\ReverseTest_int.cs" />
+    <Compile Include="Algorithm\Mutating\RotateTest.cs" />
+    <Compile Include="Algorithm\NonModifying\AdjacentFindTest.cs" />
+    <Compile Include="Algorithm\NonModifying\CountIfTest.cs" />
+    <Compile Include="Algorithm\NonModifying\CountTest.cs" />
+    <Compile Include="Algorithm\NonModifying\EqualTest.cs" />
+    <Compile Include="Algorithm\NonModifying\FindEndTest.cs" />
+    <Compile Include="Algorithm\NonModifying\FindFirstOf.cs" />
+    <Compile Include="Algorithm\NonModifying\FindIfTest.cs" />
+    <Compile Include="Algorithm\NonModifying\FindTest.cs" />
+    <Compile Include="Algorithm\NonModifying\LexCompareTest.cs" />
+    <Compile Include="Algorithm\NonModifying\MinElementTest.cs" />
+    <Compile Include="Algorithm\NonModifying\MaxElementTest.cs" />
+    <Compile Include="Algorithm\NonModifying\MismatchTest.cs" />
+    <Compile Include="Algorithm\NonModifying\SearchNTest.cs" />
+    <Compile Include="Algorithm\NonModifying\SearchTest.cs" />
+    <Compile Include="Algorithm\Numeric\AccumulateTest.cs" />
+    <Compile Include="Algorithm\Removing\RemoveCopyIfTest.cs" />
+    <Compile Include="Algorithm\Removing\RemoveCopyTest.cs" />
+    <Compile Include="Algorithm\Removing\RemoveIfTest.cs" />
+    <Compile Include="Algorithm\Removing\RemoveTest.cs" />
+    <Compile Include="Algorithm\Removing\UniqueCopyTest_Int.cs" />
+    <Compile Include="Algorithm\Removing\UniqueCopyTest_String.cs" />
+    <Compile Include="Algorithm\Removing\UniqueTest_Int.cs" />
+    <Compile Include="Algorithm\Sorting\NthElementTest.cs" />
+    <Compile Include="Algorithm\Sorting\PartitionTest.cs" />
+    <Compile Include="Algorithm\Sorting\SortTest.cs" />
+    <Compile Include="Algorithm\Sorting\StableSortTest.cs" />
+    <Compile Include="Collections\VectorTest_int.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Dummy.cs" />
+    <Compile Include="Functional\BinaryPredicateTest.cs" />
+    <Compile Include="Functional\BindTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\CSTL.csproj">
+      <Project>{B4D21816-6533-4F92-B0EA-FEC86FBBEDEC}</Project>
+      <Name>CSTL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Algorithm\SortedRange\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
