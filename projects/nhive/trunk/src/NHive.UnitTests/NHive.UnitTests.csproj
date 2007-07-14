@@ -37,6 +37,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ArrayList\ArrayList32ConstructorTests.cs" />
+    <Compile Include="Collections\ArrayList\ArrayList32Factory.cs" />
+    <Compile Include="Collections\ArrayList\ArrayList32IteratorTests.cs" />
+    <Compile Include="Collections\ArrayList\ArrayList32TestArgs.cs" />
     <Compile Include="Collections\ArrayList\ArrayListTests.cs" />
     <Compile Include="BaseClasses\ListTestsBase.cs" />
     <Compile Include="BaseClasses\BufferedHiveTestsBase.cs" />
@@ -44,6 +48,7 @@
     <Compile Include="BaseClasses\HiveTestsBase.cs" />
     <Compile Include="BaseClasses\RandomAccessIteratableTestsBase.cs" />
     <Compile Include="Collections\ArrayList\ArrayListFactory.cs" />
+    <Compile Include="Collections\ArrayList\ArrayListTestsBase.cs" />
     <Compile Include="Factories\StreamFactory.cs" />
     <Compile Include="Hives\CharStream.cs" />
     <Compile Include="BaseClasses\InputIterableTestsBase.cs" />
