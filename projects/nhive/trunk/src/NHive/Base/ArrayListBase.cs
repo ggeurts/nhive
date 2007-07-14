@@ -83,7 +83,7 @@ namespace NHive.Base
 
         #endregion
 
-        #region Find operations
+        #region IndexOf operation
 
         public override TSize IndexOf(T item)
         {

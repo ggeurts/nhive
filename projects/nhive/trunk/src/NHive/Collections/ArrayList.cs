@@ -4,17 +4,17 @@ namespace NHive
     using NHive.Base;
     using NHive.Base.Size;
 
-    public class ArrayList<T> : ArrayListBase<T, int, Int32Operations>
+    public class ArrayList32<T> : ArrayListBase<T, int, Int32Operations>
     {
-        public ArrayList()
+        public ArrayList32()
             : base()
         { }
 
-        public ArrayList(int capacity)
+        public ArrayList32(int capacity)
             : base(capacity)
         { }
 
-       public ArrayList(int capacity, IEqualityComparer<T> itemEqualityComparer)
+       public ArrayList32(int capacity, IEqualityComparer<T> itemEqualityComparer)
             : base(capacity, itemEqualityComparer)
         { }
     }

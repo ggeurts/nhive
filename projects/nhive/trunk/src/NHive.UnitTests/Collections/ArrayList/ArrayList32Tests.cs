@@ -11,7 +11,7 @@ namespace NHive.UnitTests
     [ProviderFactory(
         typeof(ArrayList32Factory),
         typeof(ArrayList32TestArgs<string>))]
-    public class ArayList32Tests : ArrayListTestsBase<string, int, Int32Operations, ArrayList<string>>
+    public class ArrayList32Tests : ArrayListTestsBase<string, int, Int32Operations, ArrayList32<string>>
     {
         private static string[] _items = new string[] { "item 1", "item 2", "item 3" };
         private static Random _random = new Random(0);
@@ -28,14 +28,14 @@ namespace NHive.UnitTests
         typeof(ArrayList32Factory), 
         typeof(ArrayList32TestArgs<string>))]
     public class ArrayList32IteratorTests
-        : RandomAccessIteratableTestsBase<string, int, ArrayList<string>, ArrayList<string>.Iterator>
+        : RandomAccessIteratableTestsBase<string, int, ArrayList32<string>, ArrayList32<string>.Iterator>
     { }
 
     internal class ArrayList32TestArgs<T>
-        : ListTestArgs<T, int, ArrayList<T>>
-        , IRandomAccessIteratableTestArgs<T, int, ArrayList<T>, ArrayList<T>.Iterator>
+        : ListTestArgs<T, int, ArrayList32<T>>
+        , IRandomAccessIteratableTestArgs<T, int, ArrayList32<T>, ArrayList32<T>.Iterator>
     {
-        public ArrayList32TestArgs(ArrayList<T> hive, IEnumerable<T> expectedItems)
+        public ArrayList32TestArgs(ArrayList32<T> hive, IEnumerable<T> expectedItems)
             : base(hive, expectedItems)
         { }
     }
@@ -56,7 +56,7 @@ namespace NHive.UnitTests
 
         private ArrayList32TestArgs<T> CreateTestArgs<T>(params T[] items)
         {
-            ArrayList<T> list = new ArrayList<T>();
+            ArrayList32<T> list = new ArrayList32<T>();
             list.AddRange(items);
             return new ArrayList32TestArgs<T>(list, items);
         }

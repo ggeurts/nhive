@@ -11,34 +11,34 @@ namespace NHive.UnitTests
         [Test]
         public void CreateListWithDefaultCapacity()
         {
-            ArrayList<int> list = new ArrayList<int>();
+            ArrayList32<int> list = new ArrayList32<int>();
             Assert.AreEqual(8, list.Capacity);
         }
 
         [Test]
         public void CreateListWithNonDefaultCapacity()
         {
-            ArrayList<int> list = new ArrayList<int>(20);
+            ArrayList32<int> list = new ArrayList32<int>(20);
             Assert.GreaterEqualThan(list.Capacity, 20);
         }
 
         [Test]
         public void CreateListWithDefaultCapacityIfCapacityIsLessThanDefault()
         {
-            ArrayList<int> list = new ArrayList<int>(4);
+            ArrayList32<int> list = new ArrayList32<int>(4);
             Assert.AreEqual(8, list.Capacity);
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateListWithZeroCapacityThrowsArgumentOutOfRangeException()
         {
-            ArrayList<int> list = new ArrayList<int>(0);
+            ArrayList32<int> list = new ArrayList32<int>(0);
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CreateListWithNegativeCapacityThrowsArgumentOutOfRangeException()
         {
-            ArrayList<int> list = new ArrayList<int>(-1);
+            ArrayList32<int> list = new ArrayList32<int>(-1);
         }
     }
 }
