@@ -8,7 +8,7 @@ namespace NHive.UnitTests
     using NHive.UnitTests.Factories;
 
     [TestFixture]
-    public class ArrayListConstructorTests
+    public class ArrayList32ConstructorTests
     {
         private Random _random = new Random();
 
@@ -46,19 +46,15 @@ namespace NHive.UnitTests
         }
     }
 
-    [TypeFixture(
-        typeof(ArrayListTestArgs<string>))]
-    [ProviderFactory(
-        typeof(ArrayListFactory),
-        typeof(ArrayListTestArgs<string>))]
-    public abstract class ArrayListTestsBase<T, TSize, TSizeOperations>
-        : ListTestsBase<T, TSize, ArrayListBase<T, TSize, TSizeOperations>>
+    public abstract class ArrayListTestsBase<T, TSize, TSizeOperations, THive>
+        : ListTestsBase<T, TSize, THive>
         where TSize: struct, IConvertible
         where TSizeOperations: ISizeOperations<TSize>, new()
+        where THive: ArrayListBase<T, TSize, TSizeOperations>
     {
         [Test]
         public void InsertIncreasesCapacityIfNoSpareCapacityExists
-            (ListTestArgs<T, TSize, ArrayListBase<T, TSize, TSizeOperations>> args)
+            (ListTestArgs<T, TSize, THive> args)
         {
             for (int capacityIncreaseCount = 0; capacityIncreaseCount < 3; capacityIncreaseCount++)
             {
@@ -78,7 +74,7 @@ namespace NHive.UnitTests
 
         [Test]
         public void InsertRangeIncreasesCapacityIfNoSpareCapacityExists
-            (ListTestArgs<T, TSize, ArrayListBase<T, TSize, TSizeOperations>> args)
+            (ListTestArgs<T, TSize, THive> args)
         {
             for (int capacityIncreaseCount = 0; capacityIncreaseCount < 3; capacityIncreaseCount++)
             {
@@ -93,11 +89,27 @@ namespace NHive.UnitTests
     }
 
     [TypeFixture(
-        typeof(ArrayListTestArgs<string>))]
+        typeof(ArrayList32TestArgs<string>))]
     [ProviderFactory(
-        typeof(ArrayListFactory), 
-        typeof(ArrayListTestArgs<string>))]
-    public class ArrayListIteratorTests
+        typeof(ArrayList32Factory),
+        typeof(ArrayList32TestArgs<string>))]
+    public class ArayList32Tests : ArrayListTestsBase<string, int, Int32Operations, ArrayList<string>>
+    {
+        private static string[] _items = new string[] { "item 1", "item 2", "item 3" };
+        private static Random _random = new Random(0);
+
+        protected override string CreateRandomItem()
+        {
+            return _items[_random.Next(_items.Length - 1)];
+        }
+    }
+
+    [TypeFixture(
+        typeof(ArrayList32TestArgs<string>))]
+    [ProviderFactory(
+        typeof(ArrayList32Factory), 
+        typeof(ArrayList32TestArgs<string>))]
+    public class ArrayList32IteratorTests
         : RandomAccessIteratableTestsBase<string, int, ArrayList<string>, ArrayList<string>.Iterator>
     { }
 }

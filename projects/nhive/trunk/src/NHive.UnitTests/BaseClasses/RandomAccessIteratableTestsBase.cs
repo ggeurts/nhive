@@ -4,7 +4,7 @@ namespace NHive.UnitTests
     using System.Collections.Generic;
     using MbUnit.Framework;
 
-    public interface IRandomAccessIterableTestArgs<T, TSize, THive, TIterator>
+    public interface IRandomAccessIteratableTestArgs<T, TSize, THive, TIterator>
         : IForwardIterableTestArgs<T, TSize, THive, TIterator>
         where THive : IRandomAccessIteratable<T, TSize, TIterator>
         where TIterator : struct, IRandomAccessIterator<T, TSize, TIterator>

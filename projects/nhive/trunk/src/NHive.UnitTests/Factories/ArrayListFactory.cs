@@ -1,36 +1,39 @@
 namespace NHive.UnitTests.Factories
 {
     using MbUnit.Framework;
-using System.Collections.Generic;
+    using System.Collections.Generic;
+    using NHive.Base;
+    using NHive.Base.Size;
 
-    public class ArrayListTestArgs<T>
+    public class ArrayList32TestArgs<T>
         : ListTestArgs<T, int, ArrayList<T>>
-        , IRandomAccessIterableTestArgs<T, int, ArrayList<T>, ArrayList<T>.Iterator>
+        , IRandomAccessIteratableTestArgs<T, int, ArrayList<T>, ArrayList<T>.Iterator>
+        , IInputIteratableTestArgs<T, int, ArrayList<T>, ArrayList<T>.Iterator>
     {
-        public ArrayListTestArgs(ArrayList<T> hive, IEnumerable<T> expectedItems)
+        public ArrayList32TestArgs(ArrayList<T> hive, IEnumerable<T> expectedItems)
             : base(hive, expectedItems)
         { }
     }
 
-    internal class ArrayListFactory
+    internal class ArrayList32Factory
     {
         [Factory]
-        public ArrayListTestArgs<string> EmptyStringArrayList
+        public ArrayList32TestArgs<string> EmptyStringArrayList
         {
             get { return CreateTestArgs<string>(); }
         }
 
         [Factory]
-        public ArrayListTestArgs<string> NonEmptyStringArrayList
+        public ArrayList32TestArgs<string> NonEmptyStringArrayList
         {
             get { return CreateTestArgs("#1", "#two", "#tres", "#vier"); }
         }
 
-        private ArrayListTestArgs<T> CreateTestArgs<T>(params T[] items)
+        private ArrayList32TestArgs<T> CreateTestArgs<T>(params T[] items)
         {
             ArrayList<T> list = new ArrayList<T>();
             list.AddRange(items);
-            return new ArrayListTestArgs<T>(list, items);
+            return new ArrayList32TestArgs<T>(list, items);
         }
     }
 }
