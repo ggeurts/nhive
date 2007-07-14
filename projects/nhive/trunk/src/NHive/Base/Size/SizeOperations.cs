@@ -19,17 +19,18 @@ namespace NHive.Base.Size
             {
                 if (_defaultInstance == null)
                 {
-                    switch (Convert.GetTypeCode(typeof(TSize)))
+                    if (typeof(TSize) == typeof(int))
                     {
-                        case TypeCode.Int32:
-                            _defaultInstance = (ISizeOperations<TSize>) (object) new Int32Operations();
-                            break;
-                        case TypeCode.Int64:
-                            _defaultInstance = (ISizeOperations<TSize>)(object) new Int64Operations();
-                            break;
-                        default:
-                            throw new NotImplementedException(string.Format(
-                                "Type '{0}' is not (yet) supported as size.", typeof(TSize).FullName));
+                        _defaultInstance = (ISizeOperations<TSize>) (object) new Int32Operations();
+                    }
+                    else if (typeof(TSize) == typeof(long))
+                    {
+                        _defaultInstance = (ISizeOperations<TSize>)(object) new Int64Operations();
+                    }
+                    else
+                    {
+                        throw new NotImplementedException(string.Format(
+                            "Type '{0}' is not (yet) supported as size.", typeof(TSize).FullName));
                     }
                 }
                 return _defaultInstance;
