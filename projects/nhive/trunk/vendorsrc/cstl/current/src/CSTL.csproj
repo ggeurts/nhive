@@ -1,0 +1,108 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4D21816-6533-4F92-B0EA-FEC86FBBEDEC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSTL</RootNamespace>
+    <AssemblyName>CSTL</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithm\Modifying\Algorithm.CopyIf.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.NextPermutation.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.PrevPermutation.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.RandomShuffle.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.Rotate.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.RotateCopy.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.FindFirstOf.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Generate.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.GenerateN.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Merge.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.ReplaceCopy.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.ReplaceCopyIf.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.SwapRanges.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Transform.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.ReverseCopy.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.AdjacentFind.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.Equal.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.FindEnd.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.LexCompare.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.Mismatch.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.Search.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.SearchN.cs" />
+    <Compile Include="Algorithm\Numeric\Algorithm.Accumulate.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.CopyN.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Copy.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.CopyBackward.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.Count.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.CountIf.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Fill.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.FillN.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.Find.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.FindIf.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.ForEach.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.MaxElement.cs" />
+    <Compile Include="Algorithm\NonModifying\Algorithm.MinElement.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.Remove.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.RemoveCopy.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.RemoveCopyIf.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.RemoveIf.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.Replace.cs" />
+    <Compile Include="Algorithm\Modifying\Algorithm.ReplaceIf.cs" />
+    <Compile Include="Algorithm\Mutating\Algorithm.Reverse.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.Unique.cs" />
+    <Compile Include="Algorithm\Removing\Algorithm.UniqueCopy.cs" />
+    <Compile Include="Algorithm\Sorting\Algorithm.Sort.cs" />
+    <Compile Include="Algorithm\Sorting\Algorithm.StableSort.cs" />
+    <Compile Include="Collections\Vector.cs" />
+    <Compile Include="Collections\VectorList.cs" />
+    <Compile Include="Functional\Binder.cs" />
+    <Compile Include="Functional\Comparison.cs" />
+    <Compile Include="Functional\Functional.cs" />
+    <Compile Include="Iterator\BackInsertIterator.cs" />
+    <Compile Include="Iterator\InsertIterator.cs" />
+    <Compile Include="Iterator\IteratorUtil.Advance.cs" />
+    <Compile Include="Iterator\Iterator.cs" />
+    <Compile Include="Iterator\IteratorUtil.CreateEnumerator.cs" />
+    <Compile Include="Iterator\IteratorUtil.Distance.cs" />
+    <Compile Include="Iterator\IteratorUtil.IsOneElementRange.cs" />
+    <Compile Include="Iterator\IteratorUtil.Swap.cs" />
+    <Compile Include="Iterator\ListIterator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Algorithm\SortedRange\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
