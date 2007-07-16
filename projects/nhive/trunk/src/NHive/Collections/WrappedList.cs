@@ -65,6 +65,8 @@ namespace NHive
             {
                 _innerList.Add(i.Read());
             }
+
+            rangeBegin = rangeEnd;
             addedItems = new Range<T, int, Iterator>(addedBegin, End);
         }
 
