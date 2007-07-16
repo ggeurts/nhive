@@ -45,6 +45,7 @@
     <Compile Include="BaseClasses\HiveTestsBase.cs" />
     <Compile Include="BaseClasses\RandomAccessIteratableTestsBase.cs" />
     <Compile Include="Collections\ArrayList\ArrayListTestsBase.cs" />
+    <Compile Include="Collections\ListWrapper\ListWrapperTests.cs" />
     <Compile Include="Factories\StreamFactory.cs" />
     <Compile Include="Hives\CharStream.cs" />
     <Compile Include="BaseClasses\InputIterableTestsBase.cs" />

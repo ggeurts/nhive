@@ -71,5 +71,13 @@ namespace NHive.UnitTests
             Assert.AreEqual(default(bool), args.Hive.GetProperty<bool>(), "GetProperty<bool>()");
             Assert.AreEqual(default(object), args.Hive.GetProperty<object>(), "GetProperty<object>()");
         }
+
+        protected static void IgnoreTestIfHiveIsReadOnly(IHive<T> hive)
+        {
+            if (hive.IsReadOnly)
+            {
+                Assert.Ignore("Not applicable to read-only collections.");
+            }
+        }
     }
 }

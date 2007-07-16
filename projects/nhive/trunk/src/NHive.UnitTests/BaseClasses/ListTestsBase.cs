@@ -50,6 +50,8 @@ namespace NHive.UnitTests
         [Test]
         public void AddAtEnd(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             T lastItem = CreateRandomItem();
             args.Hive.Add(lastItem);
 
@@ -65,6 +67,8 @@ namespace NHive.UnitTests
         [Test]
         public void AddIncrementsCount(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             for (int i = 0; i < 3; i++)
             {
                 TSize initialCount = args.Hive.Count;
@@ -76,6 +80,8 @@ namespace NHive.UnitTests
         [Test]
         public void AddIncrementsRevision(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             for (int i = 0; i < 3; i++)
             {
                 long revision = args.Hive.Revision;
@@ -87,6 +93,8 @@ namespace NHive.UnitTests
         [Test]
         public void AddRangeAtEnd(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             List<T> range = new List<T>(CreateRange(3)); 
             args.Hive.AddRange(range);
 
@@ -107,6 +115,9 @@ namespace NHive.UnitTests
         public void AddRangeIncrementsCount(ListTestArgs<T, TSize, THive> args)
         {
             const int RANGE_SIZE = 3;
+
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             TSize initialCount = args.Hive.Count;
             args.Hive.AddRange(CreateRange(RANGE_SIZE));
             Assert.AreEqual(Size.Add(initialCount, RANGE_SIZE), args.Hive.Count);
@@ -116,6 +127,9 @@ namespace NHive.UnitTests
         public void AddRangeIncrementsRevisionWhenRangeIsNotEmpty(ListTestArgs<T, TSize, THive> args)
         {
             const int RANGE_SIZE = 3;
+
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             long initialRevision = args.Hive.Revision;
             args.Hive.AddRange(CreateRange(RANGE_SIZE));
             Assert.Greater(args.Hive.Revision, initialRevision);
@@ -124,6 +138,8 @@ namespace NHive.UnitTests
         [Test]
         public void AddRangeDoesNotIncrementRevisionWhenRangeIsEmpty(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             long initialRevision = args.Hive.Revision;
             args.Hive.AddRange(CreateRange(0));
             Assert.AreEqual(args.Hive.Revision, initialRevision);
@@ -136,6 +152,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertAtBegin(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             T firstItem = CreateRandomItem();
             args.Hive.Insert((TSize)(object) 0, firstItem);
 
@@ -153,7 +171,9 @@ namespace NHive.UnitTests
         [Test]
         public void InsertAtEnd(ListTestArgs<T, TSize, THive> args)
         {
-            T lastItem =  CreateRandomItem();
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
+            T lastItem = CreateRandomItem();
             args.Hive.Insert(args.Hive.Count, lastItem);
 
             TSize itemIndex = Size.Zero;
@@ -168,6 +188,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertInMiddle(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             long itemCount = Size.ToInt64(args.Hive.Count);
             if (itemCount < 2) return;
 
@@ -192,18 +214,22 @@ namespace NHive.UnitTests
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertThrowsArgumentOutOfRangeExceptionIfIndexIsLessThanZero(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
             args.Hive.Insert(Size.Const(-1), CreateRandomItem());
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertThrowsArgumentOutOfRangeExceptionIfIndexIsGreaterThanCount(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
             args.Hive.Insert(Size.Add(args.Hive.Count, 1), CreateRandomItem());
         }
 
         [Test]
         public void InsertIncrementsCount(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             for (int i = 0; i < 3; i++)
             {
                 TSize initialCount = args.Hive.Count;
@@ -215,6 +241,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertIncrementsRevision(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             for (int i = 0; i < 3; i++)
             {
                 long revision = args.Hive.Revision;
@@ -226,6 +254,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertRangeAtBegin(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             List<T> range = new List<T>(CreateRange(3));
             args.Hive.InsertRange(Size.Zero, range);
 
@@ -245,6 +275,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertRangeAtEnd(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             List<T> range = new List<T>(CreateRange(3));
             args.Hive.InsertRange(args.Hive.Count, range);
 
@@ -264,6 +296,7 @@ namespace NHive.UnitTests
         [Test]
         public void InsertRangeInMiddle(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
             if (Size.Compare(args.Hive.Count, Size.Const(2)) < 0) return;
 
             List<T> range = new List<T>(CreateRange(3));
@@ -291,6 +324,9 @@ namespace NHive.UnitTests
         public void InsertRangeIncrementsCount(ListTestArgs<T, TSize, THive> args)
         {
             const int RANGE_SIZE = 3;
+
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             TSize initialCount = args.Hive.Count;
             args.Hive.InsertRange(Size.Zero, CreateRange(RANGE_SIZE));
             Assert.AreEqual(Size.Add(initialCount, RANGE_SIZE), args.Hive.Count);
@@ -300,6 +336,9 @@ namespace NHive.UnitTests
         public void InsertRangeIncrementsRevisionWhenRangeIsNotEmpty(ListTestArgs<T, TSize, THive> args)
         {
             const int RANGE_SIZE = 3;
+
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             long initialRevision = args.Hive.Revision;
             args.Hive.InsertRange(Size.Zero, CreateRange(RANGE_SIZE));
             Assert.Greater(args.Hive.Revision, initialRevision);
@@ -308,6 +347,8 @@ namespace NHive.UnitTests
         [Test]
         public void InsertRangeDoesNotIncrementRevisionWhenRangeIsEmpty(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             long initialRevision = args.Hive.Revision;
             args.Hive.InsertRange(Size.Zero, CreateRange(0));
             Assert.AreEqual(args.Hive.Revision, initialRevision);
@@ -316,12 +357,14 @@ namespace NHive.UnitTests
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertRangeThrowsArgumentOutOfRangeExceptionIfIndexIsLessThanZero(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
             args.Hive.InsertRange(Size.Const(-1), CreateRange(1));
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertRangeThrowsArgumentOutOfRangeExceptionIfIndexIsGreaterThanCount(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
             args.Hive.InsertRange(Size.Add(args.Hive.Count, 1), CreateRange(1));
         }
 
@@ -332,6 +375,8 @@ namespace NHive.UnitTests
         [Test]
         public void RemoveFromEnd(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             for (int itemIndex = args.ExpectedItems.Count - 1; itemIndex >= 0; itemIndex--)
             {
                 T expectedItem = args.ExpectedItems[itemIndex];
@@ -343,6 +388,8 @@ namespace NHive.UnitTests
         [Test]
         public void RemoveFromBegin(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             TSize itemIndex = Size.Zero;
             foreach (T expectedItem in args.ExpectedItems)
             {
@@ -355,6 +402,8 @@ namespace NHive.UnitTests
         [Test]
         public void RemoveDecrementsCount(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             TSize itemIndex = Size.Zero;
             foreach (T expectedItem in args.ExpectedItems)
             {
@@ -368,6 +417,8 @@ namespace NHive.UnitTests
         [Test]
         public void RemoveIncrementsRevision(ListTestArgs<T, TSize, THive> args)
         {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
             TSize itemIndex = Size.Zero;
             foreach (T expectedItem in args.ExpectedItems)
             {

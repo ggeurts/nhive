@@ -1,9 +1,9 @@
 namespace NHive.UnitTests
 {
     using System;
+    using MbUnit.Framework;
     using NHive.Base;
     using NHive.Base.Size;
-    using MbUnit.Framework;
 
     public abstract class ArrayListTestsBase<T, TSize, TSizeOperations, THive>
         : ListTestsBase<T, TSize, THive>
