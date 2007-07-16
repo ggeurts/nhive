@@ -14,6 +14,13 @@ namespace NHive
         bool IsEmpty { get; }
 
         /// <summary>
+        /// Indicates whether the hive can be modified or not.
+        /// </summary>
+        /// <value>Returns <c>true</c> if hive is read-only. Returns <c>false</c> if
+        /// items can be added to, removed from and/or updated in the hive.</value>
+        bool IsReadOnly { get; }
+
+        /// <summary>
         /// Retrieves optional hive property.
         /// </summary>
         /// <typeparam name="P">Property type.</typeparam>

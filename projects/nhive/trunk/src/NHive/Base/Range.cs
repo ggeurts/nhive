@@ -48,6 +48,11 @@ namespace NHive.Base
             get { return _begin.Equals(_end); }
         }
 
+        public bool IsReadOnly
+        {
+            get { return true; }
+        }
+
         public P GetProperty<P>()
         {
             return _begin.Parent != null

@@ -162,11 +162,19 @@ namespace NHive.Base.Iterators
         }
 
         /// <summary>
-        /// Indicates whether the buffer is empty.
+        /// See <see cref="IHive.IsEmpty"/>.
         /// </summary>
         public bool IsEmpty
         {
             get { return _begin.Equals(_end); }
+        }
+
+        /// <summary>
+        /// See <see cref="IHive{T}.IsReadOnly"/>.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get { return true; }
         }
 
         /// <summary>
