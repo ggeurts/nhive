@@ -13,7 +13,7 @@ namespace NHive.Base
         where TSize : struct, IConvertible
         where TSizeOperations : ISizeOperations<TSize>, new()
     {
-        protected static readonly TSize DEFAULT_CAPACITY = Size.Const(8);
+        protected static readonly TSize DEFAULT_CAPACITY = Size.From(8);
 
         #region Fields
 
@@ -87,14 +87,14 @@ namespace NHive.Base
 
         public override TSize IndexOf(T item)
         {
-            for (long i = 0; i < Size.ToInt64(_count); i++)
+            for (TSize i = Size.Zero; !Size.Equals(_count); Size.Increment(ref i))
             {
-                if (ItemEqualityComparer.Equals(item, _innerArray[i]))
+                if (ItemEqualityComparer.Equals(item, Size.GetValueFromArray<T>(_innerArray, i)))
                 {
-                    return Size.FromInt64(i);
+                    return i;
                 }
             }
-            return Size.Const(-1);
+            return Size.From(-1);
         }
 
         #endregion
@@ -107,21 +107,21 @@ namespace NHive.Base
 
             TSize index = position.Key;
             EnsureSpaceExists(index, Size.Add(index, 1));
-            _innerArray[Size.ToInt64(index)] = item;
+            Size.SetValueInArray(_innerArray, item, index);
         }
 
         protected override void OnAddRange<TInputSize, TInput>(
-            ref TInput rangeBegin, TInput rangeEnd, out Range<T, TSize, Iterator> addedItems)
+            ref TInput nextInRange, TInput endOfRange, out Range<T, TSize, Iterator> addedItems)
         {
-            OnInsertRange(End, new Range<T, TInputSize, TInput>(rangeBegin, rangeEnd), out addedItems);
-            rangeBegin = rangeEnd;
+            OnInsertRange(End, new Range<T, TInputSize, TInput>(nextInRange, endOfRange), out addedItems);
+            nextInRange = endOfRange;
         }
 
         protected override void OnInsert(Iterator position, T item)
         {
             TSize index = position.Key;
             EnsureSpaceExists(index, Size.Add(index, 1));
-            _innerArray[Size.ToInt64(index)] = item;
+            Size.SetValueInArray(_innerArray, item, index);
         }
 
         protected override void OnInsertRange<TInputSize, TInput>
@@ -136,10 +136,11 @@ namespace NHive.Base
                 endIndex = Size.Add(beginIndex, Size.From<TInputSize>(itemCount));
                 EnsureSpaceExists(beginIndex, endIndex);
 
-                long targetIndex = Size.ToInt64(beginIndex);
+                TSize targetIndex = beginIndex;
                 for (TInput i = range.Begin; !i.Equals(range.End); i.Increment())
                 {
-                    _innerArray[targetIndex++] = i.Read();
+                    Size.SetValueInArray(_innerArray, i.Read(), targetIndex);
+                    Size.Increment(ref targetIndex);
                 }
             }
             else
@@ -209,7 +210,7 @@ namespace NHive.Base
 
         protected override void OnUpdate(Iterator position, T newItem)
         {
-            _innerArray[Size.ToInt64(position.Key)] = newItem;
+            Size.SetValueInArray(_innerArray, newItem, position.Key);
         }
 
         #endregion
@@ -255,7 +256,7 @@ namespace NHive.Base
 
         protected sealed override T OnRead(TSize index)
         {
-            return _innerArray[Size.ToInt32(index)];
+            return Size.GetValueFromArray(_innerArray, index);
         }
 
         #endregion

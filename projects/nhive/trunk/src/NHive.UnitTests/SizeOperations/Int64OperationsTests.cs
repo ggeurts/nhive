@@ -5,9 +5,9 @@ namespace NHive.UnitTests.SizeOperations
     using NHive.Base.Size;
 
     [TestFixture]
-    public class Int32OperationsTests
+    public class Int64OperationsTests
     {
-        private Int32Operations Size = new Int32Operations();
+        private Int64Operations Size = new Int64Operations();
 
         #region Predefined constant tests
 
@@ -24,13 +24,25 @@ namespace NHive.UnitTests.SizeOperations
         [Test]
         public void ConvertToInt64()
         {
-            Assert.AreEqual(int.MaxValue, Size.ToInt64(int.MaxValue));
+            Assert.AreEqual(long.MaxValue, Size.ToInt64(long.MaxValue));
         }
 
         [Test]
         public void ConvertFromInt64()
         {
-            Assert.AreEqual(int.MinValue, Size.From((long) int.MinValue));
+            Assert.AreEqual(long.MinValue, Size.From(long.MinValue));
+        }
+
+        [Test]
+        public void ConvertToInt32()
+        {
+            Assert.AreEqual(int.MaxValue, Size.ToInt64((long) int.MaxValue));
+        }
+
+        [Test]
+        public void ConvertFromInt32()
+        {
+            Assert.AreEqual(int.MinValue, Size.From(int.MinValue));
         }
 
         #endregion
@@ -40,7 +52,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test]
         public void Decrement()
         {
-            int x = 1;
+            long x = 1;
             Size.Decrement(ref x);
             Assert.AreEqual(0, x);
         }
@@ -48,7 +60,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test]
         public void Increment()
         {
-            int x = 1;
+            long x = 1;
             Size.Increment(ref x);
             Assert.AreEqual(2, x);
         }
@@ -66,13 +78,13 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void AddThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            Size.Add(int.MaxValue, 1);
+            Size.Add(long.MaxValue, 1);
         }
 
         [Test]
         public void AddWith()
         {
-            int x = 4;
+            long x = 4;
             Assert.AreEqual(10, Size.AddWith(ref x, 6), "AddWith()");
             Assert.AreEqual(10, x, "x");
         }
@@ -80,7 +92,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void AddWithThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            int x = int.MaxValue;
+            long x = long.MaxValue;
             Size.AddWith(ref x, 1);
         }
 
@@ -93,13 +105,13 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void SubtractThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            Size.Subtract(int.MinValue, 1);
+            Size.Subtract(long.MinValue, 1);
         }
 
         [Test]
         public void SubtractWith()
         {
-            int x = 10;
+            long x = 10;
             Assert.AreEqual(4, Size.SubtractWith(ref x, 6), "SubtractWith()");
             Assert.AreEqual(4, x, "x");
         }
@@ -107,7 +119,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void SubtractWithThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            int x = int.MinValue;
+            long x = long.MinValue;
             Size.SubtractWith(ref x, 1);
         }
 
@@ -120,13 +132,13 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void MultiplyThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            Size.Multiply(int.MaxValue, 6);
+            Size.Multiply(long.MaxValue, 6);
         }
 
         [Test]
         public void MultiplyWith()
         {
-            int x = 4;
+            long x = 4;
             Assert.AreEqual(24, Size.MultiplyWith(ref x, 6), "MultiplyWith()");
             Assert.AreEqual(24, x, "x");
         }
@@ -134,7 +146,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(OverflowException))]
         public void MultiplyWithThrowsOverflowExceptionIfResultExceedsSizeLimits()
         {
-            int x = int.MaxValue;
+            long x = long.MaxValue;
             Size.MultiplyWith(ref x, 6);
         }
 
@@ -153,7 +165,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test]
         public void DivideWith()
         {
-            int x = 24;
+            long x = 24;
             Assert.AreEqual(4, Size.DivideWith(ref x, 6), "DivideWith()");
             Assert.AreEqual(4, x, "x");
         }
@@ -161,7 +173,7 @@ namespace NHive.UnitTests.SizeOperations
         [Test, ExpectedException(typeof(DivideByZeroException))]
         public void DivideWithThrowsDivideByZeroExceptionOnDivisionByZero()
         {
-            int x = 4;
+            long x = 4;
             Size.DivideWith(ref x, 0);
         }
 

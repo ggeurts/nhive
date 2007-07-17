@@ -4,22 +4,23 @@ namespace NHive.Base.Size
 
     public struct Int64Operations : ISizeOperations<long>
     {
+        #region Predefined constants
+
         public long Zero
         {
             get { return 0; }
         }
 
-        public long Const(int x)
-        {
-            return x;
-        }
+        #endregion
+
+        #region Conversion operations
 
         public long From<TSize2>(TSize2 x) where TSize2 : struct, IConvertible
         {
             return Convert.ToInt64(x);
         }
 
-        public long FromInt32(int x)
+        public long From(int x)
         {
             return x;
         }
@@ -39,6 +40,10 @@ namespace NHive.Base.Size
             return x;
         }
 
+        #endregion
+
+        #region Increment/Decrement operations
+
         public void Decrement(ref long x)
         {
             x--;
@@ -49,64 +54,68 @@ namespace NHive.Base.Size
             x++;
         }
 
+        #endregion
+
+        #region Mathematical operations
+
         public long Add(long x, long y)
         {
-            return x + y;
+            checked { return x + y; }
         }
 
         public long Add(long x, int y)
         {
-            return x + y;
+            checked { return x + y; }
         }
 
         public long AddWith(ref long x, long y)
         {
-            return x += y;
+            checked { return x += y; }
         }
 
         public long AddWith(ref long x, int y)
         {
-            return x += y;
+            checked { return x += y; }
         }
 
         public long Subtract(long x, long y)
         {
-            return x - y;
+            checked { return x - y; }
         }
 
         public long Subtract(long x, int y)
         {
-            return x - y;
+            checked { return x - y; }
         }
 
         public long SubtractWith(ref long x, long y)
         {
-            return x -= y;
+            checked { return x -= y; }
         }
 
         public long SubtractWith(ref long x, int y)
         {
-            return x -= y;
+            checked { return x -= y; }
         }
 
         public long Multiply(long x, long y)
         {
-            return x * y;
+            checked { return x * y; }
         }
 
         public long Multiply(long x, int y)
         {
-            return x * y;
+            checked { return x * y; }
         }
 
         public long MultiplyWith(ref long x, long y)
         {
-            return x *= y;
+            checked { return x *= y; }
         }
 
         public long MultiplyWith(ref long x, int y)
         {
-            return x *= y;
+            checked { return x *= y; }
         }
 
         public long Divide(long x, long y)
@@ -129,44 +138,70 @@ namespace NHive.Base.Size
             return x /= y;
         }
 
+        #endregion
+
+        #region Array operations
+
         public T[] CreateArray<T>(long length)
         {
             return new T[length];
         }
 
         public void CopyArray<T>(T[] sourceArray, long sourceBeginIndex, long sourceEndIndex,
-            T[] destinationArray, long destinationIndex)
+            T[] targetArray, long targetIndex)
         {
-            Array.Copy(sourceArray, sourceBeginIndex, destinationArray, destinationIndex,
+            if (sourceEndIndex > sourceArray.Length || sourceEndIndex < sourceBeginIndex)
+            {
+                throw new ArgumentOutOfRangeException("sourceEndIndex");
+            }
+
+            Array.Copy(sourceArray, sourceBeginIndex, targetArray, targetIndex,
                 sourceEndIndex - sourceBeginIndex);
         }
 
         public void ClearArray<T>(T[] array, long beginIndex, long endIndex)
         {
-            if (beginIndex < int.MaxValue)
+            if (beginIndex < 0)
             {
-                if (endIndex > int.MaxValue)
+                throw new ArgumentOutOfRangeException("beginIndex");
+            }
+            if (endIndex > array.Length || endIndex < beginIndex)
+            {
+                throw new ArgumentOutOfRangeException("endIndex");
+            }
+
+            // Delegate to default Array.Clear implementation if possible.
+            if (endIndex <= int.MaxValue)
+            {
+                Array.Clear(array, (int)beginIndex, (int)(endIndex - beginIndex));
+            }
+            else
+            {
+                if (beginIndex < int.MaxValue)
                 {
-                    endIndex = int.MaxValue;
+                    Array.Clear(array, (int)beginIndex, int.MaxValue - (int)beginIndex);
+                    beginIndex = (long) int.MaxValue + 1;
                 }
-                Array.Clear(array, (int) beginIndex, (int) (endIndex - beginIndex));
+                for (long i = beginIndex; beginIndex < endIndex; beginIndex++)
+                {
+                    array[i] = default(T);
+                }
             }
         }
 
-        public T GetArrayElement<T>(T[] array, long index)
+        public T GetValueFromArray<T>(T[] array, long index)
         {
             return array[index];
         }
 
-        public void SetArrayElement<T>(T[] array, long index, T item)
+        public void SetValueInArray<T>(T[] array, T item, long index)
         {
             array[index] = item;
         }
 
-        public int Compare(long x, long y)
-        {
-            return x.CompareTo(y);
-        }
+        #endregion
+
+        #region IEqualityComparer<long> implementation
 
         public bool Equals(long x, long y)
         {
@@ -177,5 +212,16 @@ namespace NHive.Base.Size
         {
             return obj.GetHashCode();
         }
+
+        #endregion
+
+        #region IComparer<long> implementaion
+
+        public int Compare(long x, long y)
+        {
+            return x.CompareTo(y);
+        }
+
+        #endregion
     }
 }

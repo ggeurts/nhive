@@ -41,14 +41,14 @@
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
     <Compile Include="Base\ListBase.cs" />
     <Compile Include="Base\Size\SizeOperations.cs" />
-    <Compile Include="Collections\BufferedStream.cs" />
+    <Compile Include="Base\Collections\BufferedStream.cs" />
     <Compile Include="Base\Range.cs" />
     <Compile Include="Base\ArrayListBase.cs" />
     <Compile Include="Base\Events\HiveEvents.cs" />
     <Compile Include="Base\Events\IHiveEventSubscriber.cs" />
     <Compile Include="Base\Events\HiveEventPublisher.cs" />
-    <Compile Include="Collections\EnumerableWrapper.cs" />
-    <Compile Include="Collections\WrappedList.cs" />
+    <Compile Include="Base\Collections\EnumerableWrapper.cs" />
+    <Compile Include="Base\Collections\WrappedList.cs" />
     <Compile Include="Base\Size\Int64Operations.cs" />
     <Compile Include="Base\Size\Int32Operations.cs" />
     <Compile Include="Base\Size\ISizeOperations.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="Base\Iterators\IIterator.cs" />
     <Compile Include="Base\StreamedHiveBase.cs" />
     <Compile Include="Base\HiveBase.cs" />
-    <Compile Include="Collections\ArrayList.cs" />
+    <Compile Include="Base\Collections\ArrayList.cs" />
     <Compile Include="Base\RandomAccessHiveBase.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Exceptions\ExceptionUtility.cs" />

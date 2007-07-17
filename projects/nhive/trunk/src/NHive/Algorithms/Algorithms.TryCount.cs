@@ -20,7 +20,7 @@ namespace NHive
             int itemCount = collection != null 
                 ? collection.Count 
                 : -1;
-            count = SizeOperations<TSize>.Default.FromInt32(itemCount);
+            count = SizeOperations<TSize>.Default.From(itemCount);
             return itemCount >= 0;
         }
 
@@ -36,7 +36,7 @@ namespace NHive
             }
             else
             {
-                count = SizeOperations<TSize>.Default.Const(-1);
+                count = SizeOperations<TSize>.Default.From(-1);
                 return false;
             }
         }

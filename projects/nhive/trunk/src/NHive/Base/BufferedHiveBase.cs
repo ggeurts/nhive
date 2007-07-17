@@ -113,7 +113,21 @@ namespace NHive.Base
         }
 
         protected abstract void OnAdd(T item, out TIterator position);
-        protected abstract void OnAddRange<TInputSize, TInput>(ref TInput addBegin, TInput addEnd, out Range<T, TSize, TIterator> addedItems)
+
+        /// <summary>
+        /// Adds one or more items to collection.
+        /// </summary>
+        /// <typeparam name="TInputSize">The range size type.</typeparam>
+        /// <typeparam name="TInput">The range iterator type</typeparam>
+        /// <param name="nextInRange">Iterator that both before and after invocation of this method must 
+        /// point to first item in range that has not yet been added to the collection. Must be equal 
+        /// to <paramref name="endOfRange"/> when all items in the range have been added to the collection.
+        /// </param>
+        /// <param name="endOfRange">Iterator that points to the end of the range.</param>
+        /// <param name="addedItems">Returns the items that have been added to the collection. Must return at 
+        /// least one item if the input range is not empty (that is <paramref name="nextInRange"/> is not 
+        /// equal to <paramref name="endOfRange"/>).</param>
+        protected abstract void OnAddRange<TInputSize, TInput>(ref TInput nextInRange, TInput endOfRange, out Range<T, TSize, TIterator> addedItems)
             where TInput : struct, IInputIterator<T, TInputSize, TInput>
             where TInputSize: struct, IConvertible;
 

@@ -215,7 +215,7 @@ namespace NHive.UnitTests
         public void InsertThrowsArgumentOutOfRangeExceptionIfIndexIsLessThanZero(ListTestArgs<T, TSize, THive> args)
         {
             IgnoreTestIfHiveIsReadOnly(args.Hive);
-            args.Hive.Insert(Size.Const(-1), CreateRandomItem());
+            args.Hive.Insert(Size.From(-1), CreateRandomItem());
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
@@ -297,7 +297,7 @@ namespace NHive.UnitTests
         public void InsertRangeInMiddle(ListTestArgs<T, TSize, THive> args)
         {
             IgnoreTestIfHiveIsReadOnly(args.Hive);
-            if (Size.Compare(args.Hive.Count, Size.Const(2)) < 0) return;
+            if (Size.Compare(args.Hive.Count, Size.From(2)) < 0) return;
 
             List<T> range = new List<T>(CreateRange(3));
             TSize insertIndex = Size.Add(GetRandomIndex(Size.Subtract(args.Hive.Count, 2)), 1);
@@ -358,7 +358,7 @@ namespace NHive.UnitTests
         public void InsertRangeThrowsArgumentOutOfRangeExceptionIfIndexIsLessThanZero(ListTestArgs<T, TSize, THive> args)
         {
             IgnoreTestIfHiveIsReadOnly(args.Hive);
-            args.Hive.InsertRange(Size.Const(-1), CreateRange(1));
+            args.Hive.InsertRange(Size.From(-1), CreateRange(1));
         }
 
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
@@ -381,7 +381,7 @@ namespace NHive.UnitTests
             {
                 T expectedItem = args.ExpectedItems[itemIndex];
                 args.Hive.Remove(expectedItem);
-                Assert.AreEqual(Size.Const(-1), args.Hive.IndexOf(expectedItem), "item[{0}]", itemIndex);
+                Assert.AreEqual(Size.From(-1), args.Hive.IndexOf(expectedItem), "item[{0}]", itemIndex);
             }
         }
 
@@ -394,7 +394,7 @@ namespace NHive.UnitTests
             foreach (T expectedItem in args.ExpectedItems)
             {
                 args.Hive.Remove(expectedItem);
-                Assert.AreEqual(Size.Const(-1), args.Hive.IndexOf(expectedItem), "item[{0}]", itemIndex);
+                Assert.AreEqual(Size.From(-1), args.Hive.IndexOf(expectedItem), "item[{0}]", itemIndex);
                 Size.Increment(ref itemIndex);
             }
         }
@@ -433,7 +433,7 @@ namespace NHive.UnitTests
 
         protected TSize GetRandomIndex(TSize listItemCount)
         {
-            return Size.FromInt32(
+            return Size.From(
                 _random.Next((int)
                     Math.Min(int.MaxValue, Size.ToInt64(listItemCount))));
         }

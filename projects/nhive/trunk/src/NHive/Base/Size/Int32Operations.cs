@@ -4,22 +4,23 @@ namespace NHive.Base.Size
 
     public struct Int32Operations : ISizeOperations<int>
     {
+        #region Predefined constants
+
         public int Zero 
         { 
-            get { return 0; } 
+            get { return 0; }
         }
 
-        public int Const(int x)
-        {
-            return x;
-        }
+        #endregion
+
+        #region Conversion operations
 
         public int From<TSize2>(TSize2 x) where TSize2 : struct, IConvertible
         {
             return Convert.ToInt32(x);
         }
 
-        public int FromInt32(int x)
+        public int From(int x)
         {
             return x;
         }
@@ -39,6 +40,10 @@ namespace NHive.Base.Size
             return x;
         }
 
+        #endregion
+
+        #region Increment/Decrement operations
+
         public void Decrement(ref int x)
         {
             x--;
@@ -49,34 +54,38 @@ namespace NHive.Base.Size
             x++;
         }
 
+        #endregion
+
+        #region Mathematical operations
+
         public int Add(int x, int y)
         {
-            return x + y;
+            checked { return x + y; }
         }
 
         public int AddWith(ref int x, int y)
         {
-            return x += y;
+            checked { return x += y; }
         }
 
         public int Subtract(int x, int y)
         {
-            return x - y;
+            checked { return x - y; }
         }
 
         public int SubtractWith(ref int x, int y)
         {
-            return x -= y;
+            checked { return x -= y; }
         }
 
         public int Multiply(int x, int y)
         {
-            return x * y;
+            checked { return x * y; }
         }
 
         public int MultiplyWith(ref int x, int y)
         {
-            return x *= y;
+            checked { return x *= y; }
         }
 
         public int Divide(int x, int y)
@@ -89,37 +98,54 @@ namespace NHive.Base.Size
             return x /= y;
         }
 
+        #endregion
+
+        #region Array operations
+
         public T[] CreateArray<T>(int length)
         {
             return new T[length];
         }
 
-        public void CopyArray<T>(T[] sourceArray, int sourceBeginIndex, int sourceEndIndex, 
-            T[] destinationArray, int destinationIndex)
-        {
-            Array.Copy(sourceArray, sourceBeginIndex, destinationArray, destinationIndex, 
-                sourceEndIndex - sourceBeginIndex);
-        }
-
         public void ClearArray<T>(T[] array, int beginIndex, int endIndex)
         {
+            if (beginIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException("beginIndex");
+            }
+            if (endIndex > array.Length || endIndex < beginIndex)
+            {
+                throw new ArgumentOutOfRangeException("endIndex");
+            }
+
             Array.Clear(array, beginIndex, endIndex - beginIndex);
         }
 
-        public T GetArrayElement<T>(T[] array, int index)
+        public void CopyArray<T>(T[] sourceArray, int sourceBeginIndex, int sourceEndIndex,
+            T[] targetArray, int targetIndex)
+        {
+            if (sourceEndIndex > sourceArray.Length || sourceEndIndex < sourceBeginIndex)
+            {
+                throw new ArgumentOutOfRangeException("sourceEndIndex");
+            }
+
+            Array.Copy(sourceArray, sourceBeginIndex, targetArray, targetIndex,
+                sourceEndIndex - sourceBeginIndex);
+        }
+
+        public T GetValueFromArray<T>(T[] array, int index)
         {
             return array[index];
         }
 
-        public void SetArrayElement<T>(T[] array, int index, T item)
+        public void SetValueInArray<T>(T[] array, T item, int index)
         {
             array[index] = item;
         }
 
-        public int Compare(int x, int y)
-        {
-            return x.CompareTo(y);
-        }
+        #endregion
+
+        #region IEqualityComparer<int> implementation
 
         public bool Equals(int x, int y)
         {
@@ -130,5 +156,16 @@ namespace NHive.Base.Size
         {
             return obj.GetHashCode();
         }
+
+        #endregion
+
+        #region IComparer<int> implementation
+
+        public int Compare(int x, int y)
+        {
+            return x.CompareTo(y);
+        }
+
+        #endregion
     }
 }

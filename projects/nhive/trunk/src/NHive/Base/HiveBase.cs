@@ -59,7 +59,7 @@ namespace NHive.Base
 
         public virtual bool TryGetCount(out TSize count)
         {
-            count = Size.Const(-1);
+            count = Size.From(-1);
             return false;
         }
 

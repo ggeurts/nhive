@@ -46,7 +46,7 @@ namespace NHive
     {
         Unspecified = 0,
         ReadOnly = 0x1,
-        Expandable = 0x2,
+        Fixed = 0x2,
         Sorted = 0x10,
         Persistent = 0x20,
         ThreadSafe = 0x100

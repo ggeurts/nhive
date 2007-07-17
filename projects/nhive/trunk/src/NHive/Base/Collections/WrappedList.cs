@@ -58,15 +58,13 @@ namespace NHive
         }
 
         protected override void OnAddRange<TInputSize, TInput>(
-            ref TInput rangeBegin, TInput rangeEnd, out Range<T, int, Iterator> addedItems)
+            ref TInput nextInRange, TInput endOfRange, out Range<T, int, Iterator> addedItems)
         {
             Iterator addedBegin = End;
-            for (TInput i = rangeBegin; !i.Equals(rangeEnd); i.Increment())
+            for (; !nextInRange.Equals(endOfRange); nextInRange.Increment())
             {
-                _innerList.Add(i.Read());
+                _innerList.Add(nextInRange.Read());
             }
-
-            rangeBegin = rangeEnd;
             addedItems = new Range<T, int, Iterator>(addedBegin, End);
         }
 

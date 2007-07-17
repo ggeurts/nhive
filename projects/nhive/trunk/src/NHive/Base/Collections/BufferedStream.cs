@@ -288,7 +288,7 @@ namespace NHive.Base.Iterators
                 }
 
                 BufferSegment segment = begin._segment;
-                TSize count = Size.FromInt32(-begin._indexInSegment);
+                TSize count = Size.From(-begin._indexInSegment);
 
                 if (segment != null)
                 {

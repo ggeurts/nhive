@@ -21,7 +21,7 @@ namespace NHive.Base.Size
                 {
                     if (typeof(TSize) == typeof(int))
                     {
-                        _defaultInstance = (ISizeOperations<TSize>) (object) new Int32Operations();
+                        _defaultInstance = (ISizeOperations<TSize>)(object) new Int32Operations();
                     }
                     else if (typeof(TSize) == typeof(long))
                     {
