@@ -1,4 +1,4 @@
-namespace NHive.Base.Events
+namespace NHive.Core.Events
 {
     using System;
 

@@ -2,8 +2,6 @@ namespace NHive
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base.Iterators;
-    using NHive.Base.Size;
 
     public static partial class Algorithms
     {

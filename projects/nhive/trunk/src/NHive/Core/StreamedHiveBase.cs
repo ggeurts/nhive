@@ -1,8 +1,7 @@
-namespace NHive.Base
+namespace NHive.Core
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base.Size;
 
     public abstract class StreamedHiveBase<T, TSize, TSizeOperations>
         : HiveBase<T, TSize, TSizeOperations, StreamedHiveBase<T, TSize, TSizeOperations>.Iterator>

@@ -1,4 +1,4 @@
-namespace NHive
+namespace NHive.Core
 {
     using System;
     

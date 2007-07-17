@@ -3,7 +3,6 @@ namespace NHive.Core
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using NHive.Base.Size;
 
     /// <summary>
     /// Helper type that represents a sequence of items between a

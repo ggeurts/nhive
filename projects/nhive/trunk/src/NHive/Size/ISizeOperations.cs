@@ -1,4 +1,4 @@
-namespace NHive.Base.Size
+namespace NHive.Size
 {
     using System;
     using System.Collections.Generic;

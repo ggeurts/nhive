@@ -41,7 +41,7 @@
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
     <Compile Include="Collections\ArrayList.cs" />
     <Compile Include="Core\ListBase.cs" />
-    <Compile Include="Core\Size\SizeOperations.cs" />
+    <Compile Include="Size\SizeOperations.cs" />
     <Compile Include="Core\BufferedStream.cs" />
     <Compile Include="Core\Range.cs" />
     <Compile Include="Collections\Base\ArrayListBase.cs" />
@@ -50,9 +50,9 @@
     <Compile Include="Core\Events\HiveEventPublisher.cs" />
     <Compile Include="Core\EnumerableWrapper.cs" />
     <Compile Include="Collections\WrappedList.cs" />
-    <Compile Include="Core\Size\Int64Operations.cs" />
-    <Compile Include="Core\Size\Int32Operations.cs" />
-    <Compile Include="Core\Size\ISizeOperations.cs" />
+    <Compile Include="Size\Int64Operations.cs" />
+    <Compile Include="Size\Int32Operations.cs" />
+    <Compile Include="Size\ISizeOperations.cs" />
     <Compile Include="Core\BufferedHiveBase.cs" />
     <Compile Include="IIterator.cs" />
     <Compile Include="Core\StreamedHiveBase.cs" />
@@ -90,7 +90,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Collections\" />
     <Folder Include="Streams\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

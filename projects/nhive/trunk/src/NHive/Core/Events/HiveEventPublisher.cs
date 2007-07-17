@@ -1,9 +1,9 @@
-namespace NHive.Base.Events
+namespace NHive.Core.Events
 {
     using System;
     using System.Collections.Generic;
 
-    public struct HiveEventPublisher<T, TSize, TIterator>
+    internal struct HiveEventPublisher<T, TSize, TIterator>
         where TIterator: struct, IInputIterator<T, TSize, TIterator>
         where TSize: struct, IConvertible
     {

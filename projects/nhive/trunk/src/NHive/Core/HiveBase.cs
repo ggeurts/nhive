@@ -3,8 +3,6 @@ namespace NHive.Core
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using NHive.Base.Iterators;
-    using NHive.Base.Size;
 
     public abstract class HiveBase<T, TSize, TSizeOperations, TIterator> 
         : IHive<T, TSize, TIterator>
