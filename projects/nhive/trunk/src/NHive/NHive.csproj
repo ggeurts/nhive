@@ -39,32 +39,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
-    <Compile Include="Base\ListBase.cs" />
-    <Compile Include="Base\Size\SizeOperations.cs" />
-    <Compile Include="Base\Collections\BufferedStream.cs" />
-    <Compile Include="Base\Range.cs" />
-    <Compile Include="Base\ArrayListBase.cs" />
-    <Compile Include="Base\Events\HiveEvents.cs" />
-    <Compile Include="Base\Events\IHiveEventSubscriber.cs" />
-    <Compile Include="Base\Events\HiveEventPublisher.cs" />
-    <Compile Include="Base\Collections\EnumerableWrapper.cs" />
-    <Compile Include="Base\Collections\WrappedList.cs" />
-    <Compile Include="Base\Size\Int64Operations.cs" />
-    <Compile Include="Base\Size\Int32Operations.cs" />
-    <Compile Include="Base\Size\ISizeOperations.cs" />
-    <Compile Include="Base\BufferedHiveBase.cs" />
-    <Compile Include="Base\Iterators\IIterator.cs" />
-    <Compile Include="Base\StreamedHiveBase.cs" />
-    <Compile Include="Base\HiveBase.cs" />
-    <Compile Include="Base\Collections\ArrayList.cs" />
-    <Compile Include="Base\RandomAccessHiveBase.cs" />
+    <Compile Include="Core\Collections\ArrayList.cs" />
+    <Compile Include="Core\ListBase.cs" />
+    <Compile Include="Core\Size\SizeOperations.cs" />
+    <Compile Include="Core\Collections\BufferedStream.cs" />
+    <Compile Include="Core\Range.cs" />
+    <Compile Include="Core\ArrayListBase.cs" />
+    <Compile Include="Core\Events\HiveEvents.cs" />
+    <Compile Include="Core\Events\IHiveEventSubscriber.cs" />
+    <Compile Include="Core\Events\HiveEventPublisher.cs" />
+    <Compile Include="Core\Collections\EnumerableWrapper.cs" />
+    <Compile Include="Core\Collections\WrappedList.cs" />
+    <Compile Include="Core\Size\Int64Operations.cs" />
+    <Compile Include="Core\Size\Int32Operations.cs" />
+    <Compile Include="Core\Size\ISizeOperations.cs" />
+    <Compile Include="Core\BufferedHiveBase.cs" />
+    <Compile Include="Core\Iterators\IIterator.cs" />
+    <Compile Include="Core\StreamedHiveBase.cs" />
+    <Compile Include="Core\HiveBase.cs" />
+    <Compile Include="Core\RandomAccessHiveBase.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Exceptions\ExceptionUtility.cs" />
     <Compile Include="Exceptions\HiveModifiedException.cs" />
     <Compile Include="Exceptions\HiveException.cs" />
     <Compile Include="Interfaces\IDictionaryHive.cs" />
     <Compile Include="Interfaces\IHiveBehaviour.cs" />
-    <Compile Include="Base\Iterators\IIteratable.cs" />
+    <Compile Include="Core\Iterators\IIteratable.cs" />
     <Compile Include="IHive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -88,6 +88,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collections\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
