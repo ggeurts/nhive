@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
-    <Compile Include="Core\Collections\ArrayList.cs" />
+    <Compile Include="Collections\ArrayList.cs" />
     <Compile Include="Core\ListBase.cs" />
     <Compile Include="Core\Size\SizeOperations.cs" />
     <Compile Include="Core\Collections\BufferedStream.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="Core\Events\IHiveEventSubscriber.cs" />
     <Compile Include="Core\Events\HiveEventPublisher.cs" />
     <Compile Include="Core\Collections\EnumerableWrapper.cs" />
-    <Compile Include="Core\Collections\WrappedList.cs" />
+    <Compile Include="Collections\WrappedList.cs" />
     <Compile Include="Core\Size\Int64Operations.cs" />
     <Compile Include="Core\Size\Int32Operations.cs" />
     <Compile Include="Core\Size\ISizeOperations.cs" />
@@ -90,7 +90,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Collections\" />
+    <Folder Include="Collections\Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
