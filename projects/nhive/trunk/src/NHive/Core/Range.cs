@@ -1,4 +1,4 @@
-namespace NHive.Base
+namespace NHive.Core
 {
     using System;
     using System.Collections;
@@ -6,8 +6,10 @@ namespace NHive.Base
     using NHive.Base.Size;
 
     /// <summary>
-    /// Helper type that provides an efficient <see cref="IEnumerable{T}"/> implementation
-    /// for any iteratable collection or range of items within a collection.
+    /// Helper type that represents a sequence of items between a
+    /// begin iterator (inclusive) and an end iterator (exclusive) and
+    /// provides an efficient <see cref="IEnumerable{T}"/> implementation
+    /// for the items in the range.
     /// </summary>
     public struct Range<T, TSize, TIterator> : IHive<T, TSize, TIterator>
         where TIterator : struct, IInputIterator<T, TSize, TIterator>

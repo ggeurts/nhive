@@ -1,4 +1,4 @@
-namespace NHive.Base
+namespace NHive.Collections.Base
 {
     using System;
     using System.Collections;
