@@ -2,7 +2,6 @@ namespace NHive.Core
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base.Size;
 
     public abstract class ListBase<T, TSize, TSizeOperations>
         : RandomAccessHiveBase<T, TSize, TSizeOperations>
@@ -112,18 +111,6 @@ namespace NHive.Core
         {
             base.RemoveAt(new Iterator(this, index));
         }
-
-        #endregion
-    }
-
-    public abstract class ListBase32<T>
-        : ListBase<T, int, Int32Operations>, IList<T>
-    {
-        #region Constructor(s)
-
-        protected ListBase32(IEqualityComparer<T> itemEqualityComparer)
-            : base(itemEqualityComparer)
-        { }
 
         #endregion
     }

@@ -3,7 +3,6 @@ namespace NHive.Core
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using NHive.Base.Size;
 
     /// <summary>
     /// Adapter class that upgrades a streamed hive (any <see cref="IEnumerable{T}"/> 

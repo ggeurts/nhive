@@ -2,6 +2,7 @@ namespace NHive.UnitTests
 {
     using System;
     using MbUnit.Framework;
+    using NHive.Collections;
 
     [TestFixture]
     public class ArrayList32ConstructorTests

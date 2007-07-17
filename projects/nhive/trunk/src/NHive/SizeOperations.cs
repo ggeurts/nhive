@@ -1,6 +1,7 @@
-namespace NHive.Size
+namespace NHive
 {
     using System;
+    using NHive.Core.Size;
 
     /// <summary>
     /// Utility class that provides access to default <see cref="ISizeOperations{TSize}"/>

@@ -2,7 +2,7 @@ namespace NHive.UnitTests.SizeOperations
 {
     using System;
     using MbUnit.Framework;
-    using NHive.Base.Size;
+    using NHive.Core.Size;
 
     [TestFixture]
     public class Int32OperationsTests

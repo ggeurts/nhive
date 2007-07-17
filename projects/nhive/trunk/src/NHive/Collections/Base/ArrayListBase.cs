@@ -4,9 +4,8 @@ namespace NHive.Collections.Base
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using NHive.Base.Events;
-    using NHive.Base.Iterators;
-    using NHive.Base.Size;
+    using NHive.Core;
+    using NHive.Core.Events;
 
     public class ArrayListBase<T, TSize, TSizeOperations> 
         : ListBase<T, TSize, TSizeOperations>

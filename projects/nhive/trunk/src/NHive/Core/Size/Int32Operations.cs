@@ -1,4 +1,4 @@
-namespace NHive.Size
+namespace NHive.Core.Size
 {
     using System;
 

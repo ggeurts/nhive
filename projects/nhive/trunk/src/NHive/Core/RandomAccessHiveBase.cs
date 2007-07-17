@@ -4,7 +4,6 @@ namespace NHive.Core
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using NHive.Base.Size;
 
     public abstract class RandomAccessHiveBase<T, TSize, TSizeOperations>
         : BufferedHiveBase<T, TSize, TSizeOperations, RandomAccessHiveBase<T, TSize, TSizeOperations>.Iterator>

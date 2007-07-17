@@ -3,7 +3,8 @@ namespace NHive.UnitTests
     using System;
     using System.Collections.Generic;
     using MbUnit.Framework;
-    using NHive.Base.Size;
+    using NHive.Collections;
+    using NHive.Core.Size;
 
     [TypeFixture(
         typeof(ArrayList32TestArgs<string>))]

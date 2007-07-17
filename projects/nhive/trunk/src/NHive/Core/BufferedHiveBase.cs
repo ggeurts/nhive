@@ -2,9 +2,7 @@ namespace NHive.Core
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base.Events;
-    using NHive.Base.Iterators;
-    using NHive.Base.Size;
+    using NHive.Core.Events;
 
     public abstract class BufferedHiveBase<T, TSize, TSizeOperations, TIterator>
         : HiveBase<T, TSize, TSizeOperations, TIterator>
@@ -35,14 +33,14 @@ namespace NHive.Core
 
         #endregion
 
-        #region Public properties
+        #region properties
 
         public override bool IsReadOnly
         {
             get { return false; }
         }
 
-        public HiveEventPublisher<T, TSize, TIterator> Events
+        protected HiveEventPublisher<T, TSize, TIterator> Events
         {
             get { return _events; }
         }

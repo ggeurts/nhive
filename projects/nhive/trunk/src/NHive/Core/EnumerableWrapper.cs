@@ -1,11 +1,10 @@
-namespace NHive.Streams
+namespace NHive.Core
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base;
-    using NHive.Base.Size;
+    using NHive.Core;
 
-    public sealed class EnumerableWrapper<T, TSize, TSizeOperations> 
+    internal sealed class EnumerableWrapper<T, TSize, TSizeOperations> 
         : StreamedHiveBase<T, TSize, TSizeOperations>
         where TSize: struct, IConvertible
         where TSizeOperations: ISizeOperations<TSize>, new()

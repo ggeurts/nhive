@@ -3,7 +3,7 @@ namespace NHive.Core.Events
     using System;
     using System.Collections.Generic;
 
-    internal struct HiveEventPublisher<T, TSize, TIterator>
+    public struct HiveEventPublisher<T, TSize, TIterator>
         where TIterator: struct, IInputIterator<T, TSize, TIterator>
         where TSize: struct, IConvertible
     {

@@ -2,7 +2,6 @@ namespace NHive.UnitTests
 {
     using System;
     using System.Collections.Generic;
-    using NHive.Base.Size;
     using MbUnit.Framework;
 
     public class HiveTestArgs<T, TSize, THive>

@@ -3,7 +3,7 @@ namespace NHive.UnitTests
     using System;
     using System.Collections.Generic;
     using MbUnit.Framework;
-    using NHive.Base.Size;
+    using NHive.Collections;
 
     [TypeFixture(
         typeof(WrappedListTestArgs<string>))]

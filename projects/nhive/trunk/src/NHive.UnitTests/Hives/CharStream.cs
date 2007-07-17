@@ -3,8 +3,8 @@ namespace NHive.UnitTests
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using NHive.Base;
-    using NHive.Base.Size;
+    using NHive.Core;
+    using NHive.Core.Size;
 
     public class CharStream : StreamedHiveBase<char, int, Int32Operations>
     {

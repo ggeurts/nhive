@@ -1,7 +1,8 @@
-namespace NHive
+namespace NHive.Collections
 {
     using System.Collections.Generic;
-    using NHive.Base;
+    using NHive.Collections.Base;
+    using NHive.Core.Size;
 
     public class ArrayList32<T> : ArrayListBase<T, int, Int32Operations>
     {

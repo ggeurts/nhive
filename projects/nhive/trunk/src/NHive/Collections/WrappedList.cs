@@ -1,7 +1,7 @@
 namespace NHive
 {
     using System.Collections.Generic;
-    using NHive.Base;
+    using NHive.Core;
 
     public class WrappedList<T>: ListBase32<T>
     {

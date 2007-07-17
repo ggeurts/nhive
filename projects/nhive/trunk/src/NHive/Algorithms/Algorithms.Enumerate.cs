@@ -1,7 +1,7 @@
 namespace NHive
 {
     using System;
-    using NHive.Base;
+    using NHive.Core;
     
     public static partial class Algorithms
 	{
