@@ -1,4 +1,4 @@
-namespace NHive.Base.Iterators
+namespace NHive.Core
 {
     using System;
     using System.Collections;

@@ -1,4 +1,4 @@
-namespace NHive
+namespace NHive.Streams
 {
     using System;
     using System.Collections.Generic;

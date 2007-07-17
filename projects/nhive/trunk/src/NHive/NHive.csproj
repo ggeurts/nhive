@@ -40,30 +40,30 @@
   <ItemGroup>
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
     <Compile Include="Collections\ArrayList.cs" />
-    <Compile Include="Collections\Base\ListBase.cs" />
+    <Compile Include="Core\ListBase.cs" />
     <Compile Include="Core\Size\SizeOperations.cs" />
-    <Compile Include="Core\Collections\BufferedStream.cs" />
+    <Compile Include="Core\BufferedStream.cs" />
     <Compile Include="Core\Range.cs" />
     <Compile Include="Collections\Base\ArrayListBase.cs" />
     <Compile Include="Core\Events\HiveEvents.cs" />
     <Compile Include="Core\Events\IHiveEventSubscriber.cs" />
     <Compile Include="Core\Events\HiveEventPublisher.cs" />
-    <Compile Include="Core\Collections\EnumerableWrapper.cs" />
+    <Compile Include="Core\EnumerableWrapper.cs" />
     <Compile Include="Collections\WrappedList.cs" />
     <Compile Include="Core\Size\Int64Operations.cs" />
     <Compile Include="Core\Size\Int32Operations.cs" />
     <Compile Include="Core\Size\ISizeOperations.cs" />
-    <Compile Include="Collections\Base\BufferedHiveBase.cs" />
+    <Compile Include="Core\BufferedHiveBase.cs" />
     <Compile Include="IIterator.cs" />
     <Compile Include="Core\StreamedHiveBase.cs" />
-    <Compile Include="Collections\Base\HiveBase.cs" />
-    <Compile Include="Collections\Base\RandomAccessHiveBase.cs" />
+    <Compile Include="Core\HiveBase.cs" />
+    <Compile Include="Core\RandomAccessHiveBase.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="Exceptions\ExceptionUtility.cs" />
-    <Compile Include="Exceptions\HiveModifiedException.cs" />
-    <Compile Include="Exceptions\HiveException.cs" />
-    <Compile Include="Interfaces\IDictionaryHive.cs" />
-    <Compile Include="Interfaces\IHiveBehaviour.cs" />
+    <Compile Include="Core\Exceptions\ExceptionUtility.cs" />
+    <Compile Include="Core\Exceptions\HiveModifiedException.cs" />
+    <Compile Include="Core\Exceptions\HiveException.cs" />
+    <Compile Include="Core\Interfaces\IDictionaryHive.cs" />
+    <Compile Include="Core\Interfaces\IHiveBehaviour.cs" />
     <Compile Include="IIteratable.cs" />
     <Compile Include="IHive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +88,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Collections\" />
+    <Folder Include="Streams\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
