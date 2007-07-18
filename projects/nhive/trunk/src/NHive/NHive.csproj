@@ -59,7 +59,7 @@
     <Compile Include="Core\StreamedHiveBase.cs" />
     <Compile Include="Core\HiveBase.cs" />
     <Compile Include="Core\RandomAccessHiveBase.cs" />
-    <Compile Include="Delegates.cs" />
+    <Compile Include="Core\Delegates.cs" />
     <Compile Include="Core\Exceptions\ExceptionUtility.cs" />
     <Compile Include="Core\Exceptions\HiveModifiedException.cs" />
     <Compile Include="Core\Exceptions\HiveException.cs" />

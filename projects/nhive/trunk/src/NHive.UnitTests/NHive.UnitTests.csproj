@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\CollectionTestsBase.cs" />
     <Compile Include="Collections\ArrayList\ArrayList32ConstructorTests.cs" />
     <Compile Include="Collections\ArrayList\ArrayList32Tests.cs" />
     <Compile Include="BaseClasses\ListTestsBase.cs" />

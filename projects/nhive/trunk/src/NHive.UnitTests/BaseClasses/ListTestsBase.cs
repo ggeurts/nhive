@@ -5,7 +5,7 @@ namespace NHive.UnitTests
     using MbUnit.Framework;
 
     public abstract class ListTestArgs<T, TSize, THive>
-        : BufferedHiveTestArgs<T, TSize, THive>
+        : CollectionTestArgs<T, TSize, THive>
         where THive: IList<T, TSize>
         where TSize : struct, IConvertible
     {
@@ -15,7 +15,7 @@ namespace NHive.UnitTests
     }
 
     public abstract class ListTestsBase<T, TSize, THive>
-        : BufferedHiveTestsBase<T, TSize, THive>
+        : CollectionTestsBase<T, TSize, THive>
         where THive: IList<T, TSize>
         where TSize : struct, IConvertible
     {
@@ -65,32 +65,6 @@ namespace NHive.UnitTests
         }
 
         [Test]
-        public void AddIncrementsCount(ListTestArgs<T, TSize, THive> args)
-        {
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            for (int i = 0; i < 3; i++)
-            {
-                TSize initialCount = args.Hive.Count;
-                args.Hive.Add(CreateRandomItem());
-                Assert.AreEqual(Size.Add(initialCount, 1), args.Hive.Count, "Add #{0}", i);
-            }
-        }
-
-        [Test]
-        public void AddIncrementsRevision(ListTestArgs<T, TSize, THive> args)
-        {
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            for (int i = 0; i < 3; i++)
-            {
-                long revision = args.Hive.Revision;
-                args.Hive.Add(CreateRandomItem());
-                Assert.GreaterThan(args.Hive.Revision, revision, "Add #{0}", i);
-            }
-        }
-
-        [Test]
         public void AddRangeAtEnd(ListTestArgs<T, TSize, THive> args)
         {
             IgnoreTestIfHiveIsReadOnly(args.Hive);
@@ -109,40 +83,6 @@ namespace NHive.UnitTests
                 Assert.AreEqual(rangeItem, args.Hive[itemIndex], "item[{0}]", itemIndex);
                 Size.Increment(ref itemIndex);
             }
-        }
-
-        [Test]
-        public void AddRangeIncrementsCount(ListTestArgs<T, TSize, THive> args)
-        {
-            const int RANGE_SIZE = 3;
-
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            TSize initialCount = args.Hive.Count;
-            args.Hive.AddRange(CreateRange(RANGE_SIZE));
-            Assert.AreEqual(Size.Add(initialCount, RANGE_SIZE), args.Hive.Count);
-        }
-
-        [Test]
-        public void AddRangeIncrementsRevisionWhenRangeIsNotEmpty(ListTestArgs<T, TSize, THive> args)
-        {
-            const int RANGE_SIZE = 3;
-
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            long initialRevision = args.Hive.Revision;
-            args.Hive.AddRange(CreateRange(RANGE_SIZE));
-            Assert.Greater(args.Hive.Revision, initialRevision);
-        }
-
-        [Test]
-        public void AddRangeDoesNotIncrementRevisionWhenRangeIsEmpty(ListTestArgs<T, TSize, THive> args)
-        {
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            long initialRevision = args.Hive.Revision;
-            args.Hive.AddRange(CreateRange(0));
-            Assert.AreEqual(args.Hive.Revision, initialRevision);
         }
 
         #endregion
@@ -399,36 +339,6 @@ namespace NHive.UnitTests
             }
         }
 
-        [Test]
-        public void RemoveDecrementsCount(ListTestArgs<T, TSize, THive> args)
-        {
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            TSize itemIndex = Size.Zero;
-            foreach (T expectedItem in args.ExpectedItems)
-            {
-                TSize initialCount = args.Hive.Count;
-                args.Hive.Remove(expectedItem);
-                Assert.AreEqual(Size.Subtract(initialCount, 1), args.Hive.Count, "item[{0}]", itemIndex);
-                Size.Decrement(ref itemIndex);
-            }
-        }
-
-        [Test]
-        public void RemoveIncrementsRevision(ListTestArgs<T, TSize, THive> args)
-        {
-            IgnoreTestIfHiveIsReadOnly(args.Hive);
-
-            TSize itemIndex = Size.Zero;
-            foreach (T expectedItem in args.ExpectedItems)
-            {
-                long revision = args.Hive.Revision;
-                args.Hive.Remove(expectedItem);
-                Assert.GreaterThan(args.Hive.Revision, revision, "Remove #{0}", itemIndex);
-                Size.Decrement(ref itemIndex);
-            }
-        }
-
         #endregion
 
         protected TSize GetRandomIndex(TSize listItemCount)
@@ -436,16 +346,6 @@ namespace NHive.UnitTests
             return Size.From(
                 _random.Next((int)
                     Math.Min(int.MaxValue, Size.ToInt64(listItemCount))));
-        }
-
-        protected abstract T CreateRandomItem();
-
-        protected virtual IEnumerable<T> CreateRange(long rangeSize)
-        {
-            for (int i = 0; i < rangeSize; i++)
-            {
-                yield return CreateRandomItem();
-            }
         }
     }
 }

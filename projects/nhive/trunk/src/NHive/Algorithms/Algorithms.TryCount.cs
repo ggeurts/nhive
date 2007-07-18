@@ -2,6 +2,7 @@ namespace NHive
 {
     using System;
     using System.Collections.Generic;
+    using NHive.Core;
 
     public static partial class Algorithms
     {
