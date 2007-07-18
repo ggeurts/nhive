@@ -42,6 +42,9 @@
     <Compile Include="Collections\ArrayList.cs" />
     <Compile Include="Core\ListBase.cs" />
     <Compile Include="Core\ListBase32.cs" />
+    <Compile Include="IBufferedHive.cs" />
+    <Compile Include="ICollection.cs" />
+    <Compile Include="IList.cs" />
     <Compile Include="SizeOperations.cs" />
     <Compile Include="Core\BufferedStream.cs" />
     <Compile Include="Core\Range.cs" />

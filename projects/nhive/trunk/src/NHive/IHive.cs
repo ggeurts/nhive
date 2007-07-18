@@ -1,7 +1,6 @@
 namespace NHive
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     public interface IHive<T>
@@ -77,71 +76,5 @@ namespace NHive
         where TIterator : struct, IInputIterator<T, TSize, TIterator>
         where TSize: struct, IConvertible
     {
-    }
-
-    /// <summary>
-    /// The interface to be implemented by buffered hives. A buffered hive is a 
-    /// collection of items of which the size is always known, and which can be 
-    /// enumerated or iterated repeatedly without modifying the hive.
-    /// </summary>
-    /// <typeparam name="T">The type of items stored in the hive.</typeparam>
-    /// <typeparam name="TSize">The integer type used to measure the hive size.</typeparam>
-    /// <seealso cref="IHive{T}"/>
-    public interface IBufferedHive<T, TSize>
-        : IHive<T, TSize>
-        where TSize : struct, IConvertible
-    {
-        /// <summary>
-        /// Returns the total number of items that are currently stored in the hive.
-        /// </summary>
-        TSize Count { get; }
-
-        /// <summary>
-        /// Determines whether a buffered hive contains a specific value.
-        /// </summary>
-        /// <param name="item">The item to be found in the hive.</param>
-        /// <returns>Returns <c>true</c> if <paramref name="item"/> is 
-        /// present in the hive. Otherwise returns <c>false</c>.</returns>
-        bool Contains(T item);
-    }
-
-    /// <summary>
-    /// The interface to be implemented by buffered hives that support iteration. 
-    /// See <see cref="IBufferedHive{T, TSize}"/> for more information on buffered hives.
-    /// </summary>
-    /// <typeparam name="T">The type of items stored in the hive.</typeparam>
-    /// <typeparam name="TSize">The integer type used to measure the hive size.</typeparam>
-    /// <typeparam name="TIterator">The type of iterators for the hive.</typeparam>
-    public interface IBufferedHive<T, TSize, TIterator> 
-        : IHive<T, TSize, TIterator>
-        , IBufferedHive<T, TSize>
-        where TIterator : struct, IForwardIterator<T, TSize, TIterator>
-        where TSize : struct, IConvertible
-    { }
-
-    public interface ICollection<T, TSize>
-        : IBufferedHive<T, TSize>
-        where TSize : struct, IConvertible
-    {
-        /// <summary>
-        /// Revision number of hive. The revision number is incremented when items
-        /// are added to, removed from or updated in the hive.
-        /// </summary>
-        long Revision { get; }
-
-        void Add(T item);
-        void AddRange(IEnumerable<T> range);
-        void Clear();
-        bool Remove(T item);
-    }
-
-    public interface IList<T, TSize>
-        : ICollection<T, TSize>
-        where TSize : struct, IConvertible
-    {
-        T this[TSize index] { get; set; }
-        TSize IndexOf(T item);
-        void Insert(TSize index, T item);
-        void InsertRange(TSize index, IEnumerable<T> range);
     }
 }
