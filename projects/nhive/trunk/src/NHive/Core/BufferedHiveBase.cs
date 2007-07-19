@@ -84,8 +84,8 @@ namespace NHive.Core
 
         public void AddRange(IEnumerable<T> items)
         {
-            AddRange<TSize, EnumerableWrapper<T, TSize, TSizeOperations>.Iterator>(
-                new EnumerableWrapper<T, TSize, TSizeOperations>(items));
+            AddRange<TSize, WrappedEnumerable<T, TSize, TSizeOperations>.Iterator>(
+                new WrappedEnumerable<T, TSize, TSizeOperations>(items));
         }
 
         protected void AddRange<TInputSize, TInput>(IHive<T, TInputSize, TInput> itemsToAdd)

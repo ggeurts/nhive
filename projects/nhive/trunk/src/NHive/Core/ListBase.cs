@@ -79,15 +79,15 @@ namespace NHive.Core
                 throw new ArgumentOutOfRangeException("index");
             }
 
-            EnumerableWrapper<T, TSize, TSizeOperations> range = 
-                new EnumerableWrapper<T, TSize, TSizeOperations>(items);
+            WrappedEnumerable<T, TSize, TSizeOperations> range = 
+                new WrappedEnumerable<T, TSize, TSizeOperations>(items);
             if (range.IsEmpty) return;
 
             BeginRevision();
 
             Iterator position = new Iterator(this, index);
             Range<T, TSize, Iterator> insertedRange;
-            OnInsertRange<TSize, EnumerableWrapper<T, TSize, TSizeOperations>.Iterator>(
+            OnInsertRange<TSize, WrappedEnumerable<T, TSize, TSizeOperations>.Iterator>(
                 position, range, out insertedRange);
             if (Events.HasAddEventSubscribers)
             {

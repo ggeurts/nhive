@@ -4,7 +4,7 @@ namespace NHive.Core
     using System.Collections.Generic;
     using NHive.Core;
 
-    internal sealed class EnumerableWrapper<T, TSize, TSizeOperations> 
+    internal sealed class WrappedEnumerable<T, TSize, TSizeOperations> 
         : StreamedHiveBase<T, TSize, TSizeOperations>
         where TSize: struct, IConvertible
         where TSizeOperations: ISizeOperations<TSize>, new()
@@ -12,11 +12,11 @@ namespace NHive.Core
         private IEnumerable<T> _items;
         private IEnumerator<T> _innerStream;
 
-        public EnumerableWrapper(IEnumerable<T> items)
+        public WrappedEnumerable(IEnumerable<T> items)
             : this(EqualityComparer<T>.Default, items)
         { }
 
-        public EnumerableWrapper(EqualityComparer<T> itemEqualityComparer, IEnumerable<T> items)
+        public WrappedEnumerable(EqualityComparer<T> itemEqualityComparer, IEnumerable<T> items)
             : base(itemEqualityComparer)
         {
             _items = items;

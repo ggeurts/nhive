@@ -52,7 +52,7 @@
     <Compile Include="Core\Events\HiveEvents.cs" />
     <Compile Include="Core\Events\IHiveEventSubscriber.cs" />
     <Compile Include="Core\Events\HiveEventPublisher.cs" />
-    <Compile Include="Core\EnumerableWrapper.cs" />
+    <Compile Include="Core\WrappedEnumerable.cs" />
     <Compile Include="Collections\WrappedList.cs" />
     <Compile Include="Core\Size\Int64Operations.cs" />
     <Compile Include="Core\Size\Int32Operations.cs" />
