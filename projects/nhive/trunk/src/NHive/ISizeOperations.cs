@@ -13,8 +13,10 @@ namespace NHive
     {
         #region Predefined constants
 
+        int BitCount { get; }
+
         /// <summary>
-        /// Returns zero value.
+        /// Returns <c>0</c>.
         /// </summary>
         TSize Zero { get; }
 
@@ -34,7 +36,14 @@ namespace NHive
         /// </summary>
         /// <param name="x">The value to be converted.</param>
         /// <returns>The convertsion result.</returns>
-        TSize FromInt64(long x);
+        TSize From(long x);
+
+        /// <summary>
+        /// Converts double value to <typeparamref name="TSize"/> instance.
+        /// </summary>
+        /// <param name="x">The value to be converted.</param>
+        /// <returns>The convertsion result.</returns>
+        TSize From(double x);
 
         /// <summary>
         /// Converts instance of integral type <typeparamref name="T"/> to <typeparamref name="TSize"/> instance.
@@ -251,6 +260,11 @@ namespace NHive
         /// <exception cref="DivideByZeroException">Cannot divide by zero.</exception>
         /// <remarks>post: x = pre(x) / y</remarks>
         TSize DivideWith(ref TSize x, int y);
+
+        TSize ShiftLeft(TSize x, int count);
+        TSize ShiftLeftWith(ref TSize x, int count);
+        TSize ShiftRight(TSize x, int count);
+        TSize ShiftRightWith(ref TSize x, int count);
 
         #endregion
 

@@ -6,6 +6,11 @@ namespace NHive.Core.Size
     {
         #region Predefined constants
 
+        public int BitCount
+        {
+            get { return sizeof(int) * 8; }
+        }
+
         public int Zero 
         { 
             get { return 0; }
@@ -25,7 +30,12 @@ namespace NHive.Core.Size
             return x;
         }
 
-        public int FromInt64(long x)
+        public int From(long x)
+        {
+            return (int)x;
+        }
+
+        public int From(double x)
         {
             return (int)x;
         }
@@ -96,6 +106,26 @@ namespace NHive.Core.Size
         public int DivideWith(ref int x, int y)
         {
             return x /= y;
+        }
+
+        public int ShiftLeft(int x, int count)
+        {
+            return x << count;
+        }
+
+        public int ShiftLeftWith(ref int x, int count)
+        {
+            return x << count;
+        }
+
+        public int ShiftRight(int x, int count)
+        {
+            return x >> count;
+        }
+
+        public int ShiftRightWith(ref int x, int count)
+        {
+            return x >> count;
         }
 
         #endregion

@@ -40,13 +40,15 @@
   <ItemGroup>
     <Compile Include="Algorithms\Algorithms.TryCount.cs" />
     <Compile Include="Collections\ArrayList.cs" />
+    <Compile Include="Collections\Base\HashSetBase.cs" />
+    <Compile Include="Collections\HashSet.cs" />
+    <Compile Include="Core\HiveEnumerator.cs" />
     <Compile Include="Core\ListBase.cs" />
-    <Compile Include="Core\ListBase32.cs" />
-    <Compile Include="IBufferedHive.cs" />
+    <Compile Include="IReadOnlyCollection.cs" />
     <Compile Include="ICollection.cs" />
     <Compile Include="IList.cs" />
     <Compile Include="SizeOperations.cs" />
-    <Compile Include="Core\BufferedStream.cs" />
+    <Compile Include="Core\StreamBuffer.cs" />
     <Compile Include="Core\Range.cs" />
     <Compile Include="Collections\Base\ArrayListBase.cs" />
     <Compile Include="Core\Events\HiveEvents.cs" />
@@ -57,11 +59,11 @@
     <Compile Include="Core\Size\Int64Operations.cs" />
     <Compile Include="Core\Size\Int32Operations.cs" />
     <Compile Include="ISizeOperations.cs" />
-    <Compile Include="Core\BufferedHiveBase.cs" />
+    <Compile Include="Core\CollectionBase.cs" />
     <Compile Include="IIterator.cs" />
-    <Compile Include="Core\StreamedHiveBase.cs" />
+    <Compile Include="Core\StreamBase.cs" />
     <Compile Include="Core\HiveBase.cs" />
-    <Compile Include="Core\RandomAccessHiveBase.cs" />
+    <Compile Include="Core\RandomAccessCollectionBase.cs" />
     <Compile Include="Core\Delegates.cs" />
     <Compile Include="Core\Exceptions\ExceptionUtility.cs" />
     <Compile Include="Core\Exceptions\HiveModifiedException.cs" />

@@ -5,7 +5,7 @@ namespace NHive.UnitTests
     using MbUnit.Framework;
 
     public class CollectionTestArgs<T, TSize, THive>
-        : HiveTestArgs<T, TSize, THive>
+        : ReadOnlyCollectionTestArgs<T, TSize, THive>
         where THive : ICollection<T, TSize>
         where TSize : struct, IConvertible
     {
@@ -14,11 +14,9 @@ namespace NHive.UnitTests
         { }
     }
 
-    //TODO: Add tests to see whether added items are contained in collection.
-    //TODO: Add tests to see whether removed items are no longer contained in collection.
-    //TODO: Add clear tests.
+    // TODO: Add clear tests.
     public abstract class CollectionTestsBase<T, TSize, THive>
-        : BufferedHiveTestsBase<T, TSize, THive>
+        : ReadOnlyCollectionTestsBase<T, TSize, THive>
         where THive : ICollection<T, TSize>
         where TSize : struct, IConvertible
     {
@@ -116,6 +114,35 @@ namespace NHive.UnitTests
                 Assert.GreaterThan(args.Hive.Revision, revision, "Remove #{0}", itemIndex);
                 Size.Decrement(ref itemIndex);
             }
+        }
+
+        #endregion
+
+        #region Contains tests
+
+        [Test]
+        public void ContainsIsTrueForAddedItem(CollectionTestArgs<T, TSize, THive> args)
+        {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+
+            T item = CreateRandomItem();
+            args.Hive.Add(item);
+            Assert.IsTrue(args.Hive.Contains(item));
+        }
+
+        [Test]
+        public void ContainsIsFalseForRemovedItem(CollectionTestArgs<T, TSize, THive> args)
+        {
+            IgnoreTestIfHiveIsReadOnly(args.Hive);
+            if (args.ExpectedItems.Count == 0)
+            {
+                Assert.Ignore("Collection does not contain any items to remove");
+            }
+
+            // TODO: This test is assuming set semantics at the moment!
+            T item = args.ExpectedItems[0];
+            args.Hive.Remove(item);
+            Assert.IsFalse(args.Hive.Contains(item));
         }
 
         #endregion

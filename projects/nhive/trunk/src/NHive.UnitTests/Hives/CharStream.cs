@@ -6,7 +6,7 @@ namespace NHive.UnitTests
     using NHive.Core;
     using NHive.Core.Size;
 
-    public class CharStream : StreamedHiveBase<char, int, Int32Operations>
+    public class CharStream : StreamBase<char, int, Int32Operations>
     {
         private const int BEGIN_KEY = 0;
         private const int END_KEY = -1;

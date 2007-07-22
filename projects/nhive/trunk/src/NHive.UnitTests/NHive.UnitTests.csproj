@@ -41,11 +41,12 @@
     <Compile Include="Collections\ArrayList\ArrayList32ConstructorTests.cs" />
     <Compile Include="Collections\ArrayList\ArrayList32Tests.cs" />
     <Compile Include="BaseClasses\ListTestsBase.cs" />
-    <Compile Include="BaseClasses\BufferedHiveTestsBase.cs" />
+    <Compile Include="BaseClasses\ReadOnlyCollectionTestsBase.cs" />
     <Compile Include="BaseClasses\ForwardIteratableTestsBase.cs" />
     <Compile Include="BaseClasses\HiveTestsBase.cs" />
     <Compile Include="BaseClasses\RandomAccessIteratableTestsBase.cs" />
     <Compile Include="Collections\ArrayList\ArrayListTestsBase.cs" />
+    <Compile Include="Collections\HashSet32Tests.cs" />
     <Compile Include="Collections\WrappedList\WrappedListTests.cs" />
     <Compile Include="Factories\StreamFactory.cs" />
     <Compile Include="Hives\CharStream.cs" />

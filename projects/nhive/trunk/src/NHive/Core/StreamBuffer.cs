@@ -17,8 +17,8 @@ namespace NHive.Core
     /// a stream into an array list.
     /// </para>
     /// </remarks>
-    internal class BufferedStream<T, TSize, TSizeOperations>
-        : IBufferedHive<T, TSize, BufferedStream<T, TSize, TSizeOperations>.Iterator>
+    internal class StreamBuffer<T, TSize, TSizeOperations>
+        : IReadOnlyCollection<T, TSize, StreamBuffer<T, TSize, TSizeOperations>.Iterator>
         where TSize : struct, IConvertible
         where TSizeOperations : ISizeOperations<TSize>, new()
     {
@@ -65,7 +65,7 @@ namespace NHive.Core
         /// </summary>
         /// <param name="firstSegment">First segment in buffer segment list.</param>
         /// <param name="count">Total number of items in buffer.</param>
-        private BufferedStream(BufferSegment firstSegment, TSize count)
+        private StreamBuffer(BufferSegment firstSegment, TSize count)
         {
             _firstSegment = firstSegment;
             _count = count;
@@ -84,7 +84,7 @@ namespace NHive.Core
         /// <param name="range">The range of items to be loaded into the buffer.</param>
         /// <returns>A <see cref="BufferedStream{T, TSize, TSizeOperations}"/> instance that contains
         /// all range items.</returns>
-        public static BufferedStream<T, TSize, TSizeOperations> Create<TInput>(Range<T, TSize, TInput> range)
+        public static StreamBuffer<T, TSize, TSizeOperations> Create<TInput>(Range<T, TSize, TInput> range)
             where TInput : struct, IInputIterator<T, TSize, TInput>
         {
             BufferSegment firstSegment = new BufferSegment(SEGMENT_CAPACITY_FIRST);
@@ -97,7 +97,7 @@ namespace NHive.Core
             }
             Size.AddWith(ref count, segment.Count);
 
-            return new BufferedStream<T, TSize, TSizeOperations>(firstSegment, count);
+            return new StreamBuffer<T, TSize, TSizeOperations>(firstSegment, count);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace NHive.Core
         /// <param name="range">The range of items to be loaded into the buffer.</param>
         /// <returns>A <see cref="BufferedStream{T, TSize, TSizeOperations}"/> instance that contains
         /// all range items.</returns>
-        public static BufferedStream<T, TSize, TSizeOperations> Create(IEnumerable<T> range)
+        public static StreamBuffer<T, TSize, TSizeOperations> Create(IEnumerable<T> range)
         {
             BufferSegment firstSegment = new BufferSegment(SEGMENT_CAPACITY_FIRST);
 
@@ -118,7 +118,7 @@ namespace NHive.Core
             }
             Size.AddWith(ref count, segment.Count);
 
-            return new BufferedStream<T, TSize, TSizeOperations>(firstSegment, count);
+            return new StreamBuffer<T, TSize, TSizeOperations>(firstSegment, count);
         }
 
         private static void AddSegmentItem(ref BufferSegment segment, ref TSize count, T item)
@@ -244,9 +244,9 @@ namespace NHive.Core
 
         #region IEnumerable, IEnumerable<T> Members
 
-        public Range<T, TSize, Iterator>.Enumerator GetEnumerator()
+        public HiveEnumerator<T, TSize, Iterator> GetEnumerator()
         {
-            return new Range<T, TSize, Iterator>(this).GetEnumerator();
+            return new HiveEnumerator<T,TSize,Iterator>(this);
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -266,11 +266,11 @@ namespace NHive.Core
         /// </summary>
         public struct Iterator : IForwardIterator<T, TSize, Iterator>
         {
-            private BufferedStream<T, TSize, TSizeOperations> _parent;
+            private StreamBuffer<T, TSize, TSizeOperations> _parent;
             private BufferSegment _segment;
             private int _indexInSegment;
 
-            internal Iterator(BufferedStream<T, TSize, TSizeOperations> parent,
+            internal Iterator(StreamBuffer<T, TSize, TSizeOperations> parent,
                 BufferSegment segment, int indexInSegment)
             {
                 _parent = parent;
@@ -280,7 +280,7 @@ namespace NHive.Core
 
             internal static TSize Count(Iterator begin, Iterator end)
             {
-                BufferedStream<T, TSize, TSizeOperations> parent = begin._parent;
+                StreamBuffer<T, TSize, TSizeOperations> parent = begin._parent;
                 if (begin.Equals(parent.Begin) && end.Equals(parent.End))
                 {
                     return parent.Count;

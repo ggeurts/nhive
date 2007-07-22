@@ -7,7 +7,7 @@ namespace NHive.Core.Events
         where TSize: struct, IConvertible
     {
         void Added(TIterator at);
-        void Added(Range<T, TSize, TIterator> range);
+        void Added(Range<T, TSize, TIterator> items);
         void Removing(TIterator at);
         void Removing(Range<T, TSize, TIterator> range);
     }

@@ -45,11 +45,11 @@ namespace NHive
     /// </para>
     /// <para>A buffered hive is a collection of items of which the size is always known and which may 
     /// be enumerated and/or iterated multiple times. Buffered hives support repeatable, forward-only 
-    /// enumeration or iteration. Buffered hives must implement the <see cref="IBufferedHive{T, TSize}"/> 
+    /// enumeration or iteration. Buffered hives must implement the <see cref="IReadOnlyCollection{T, TSize}"/> 
     /// interface.
     /// </para>
     /// </remarks>
-    /// <seealso cref="IBufferedHive{T, TSize}"/>
+    /// <seealso cref="IReadOnlyCollection{T, TSize}"/>
     public interface IHive<T, TSize> 
         : IHive<T>
         where TSize: struct, IConvertible

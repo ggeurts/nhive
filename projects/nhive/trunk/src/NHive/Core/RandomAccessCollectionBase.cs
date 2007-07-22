@@ -5,9 +5,9 @@ namespace NHive.Core
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    public abstract class RandomAccessHiveBase<T, TSize, TSizeOperations>
-        : BufferedHiveBase<T, TSize, TSizeOperations, RandomAccessHiveBase<T, TSize, TSizeOperations>.Iterator>
-        , IRandomAccessIteratable<T, TSize, RandomAccessHiveBase<T, TSize, TSizeOperations>.Iterator>
+    public abstract class RandomAccessCollectionBase<T, TSize, TSizeOperations>
+        : CollectionBase<T, TSize, TSizeOperations, RandomAccessCollectionBase<T, TSize, TSizeOperations>.Iterator>
+        , IRandomAccessIteratable<T, TSize, RandomAccessCollectionBase<T, TSize, TSizeOperations>.Iterator>
         where TSize : struct, IConvertible
         where TSizeOperations : ISizeOperations<TSize>, new()
     {
@@ -20,7 +20,7 @@ namespace NHive.Core
 
         #region Constructor(s)
 
-        protected RandomAccessHiveBase(IEqualityComparer<T> itemEqualityComparer)
+        protected RandomAccessCollectionBase(IEqualityComparer<T> itemEqualityComparer)
             : base(itemEqualityComparer)
         { }
 
@@ -52,15 +52,55 @@ namespace NHive.Core
 
         #endregion
 
+        #region Update operations
+
+        protected void Update(Iterator position, T newItem)
+        {
+            BeginRevision();
+
+            if (Events.HasRemovingEventSubscribers)
+            {
+                Events.PublishRemovingEvent(position);
+            }
+            OnUpdate(position, newItem);
+            if (Events.HasAddEventSubscribers)
+            {
+                Events.PublishAddedEvent(position);
+            }
+
+            EndRevision();
+        }
+
+        protected abstract void OnUpdate(Iterator position, T newItem);
+
+        #endregion
+
         #region Remove operations
+
+        public void RemoveAt(TSize index)
+        {
+            base.RemoveAt(new Iterator(this, index));
+        }
 
         public void RemoveRange(TSize startIndex, TSize count)
         {
-            base.RemoveRange(
+            RemoveRange(
                 new Range<T, TSize, Iterator>(
                     new Iterator(this, startIndex),
                     new Iterator(this, Size.Add(startIndex, count))));
         }
+
+        protected void RemoveRange(Range<T, TSize, Iterator> itemsToRemove)
+        {
+            if (itemsToRemove.IsEmpty) return;
+
+            BeginRevision();
+            Events.PublishRemovingEvent(itemsToRemove);
+            OnRemoveRange(itemsToRemove);
+            EndRevision();
+        }
+
+        protected abstract void OnRemoveRange(Range<T, TSize, Iterator> range);
 
         #endregion
 
@@ -93,21 +133,21 @@ namespace NHive.Core
 
             #region Fields
 
-            private readonly RandomAccessHiveBase<T, TSize, TSizeOperations> _parent;
+            private readonly RandomAccessCollectionBase<T, TSize, TSizeOperations> _parent;
             private TSize _key;
 
             #endregion
 
             #region Constructor(s) and Factory methods
 
-            public Iterator(RandomAccessHiveBase<T, TSize, TSizeOperations> parent, TSize key)
+            public Iterator(RandomAccessCollectionBase<T, TSize, TSizeOperations> parent, TSize key)
             {
                 _parent = parent;
                 _key = key;
             }
 
             private static Iterator CreateWithBoundaryCheck(
-                RandomAccessHiveBase<T, TSize, TSizeOperations> parent, TSize key)
+                RandomAccessCollectionBase<T, TSize, TSizeOperations> parent, TSize key)
             {
                 if (parent == null)
                 {

@@ -4,7 +4,9 @@ namespace NHive.Collections
     using NHive.Collections.Base;
     using NHive.Core.Size;
 
-    public class ArrayList32<T> : ArrayListBase<T, int, Int32Operations>
+    public class ArrayList32<T> 
+        : ArrayListBase<T, int, Int32Operations>
+        , IList<T>
     {
         public ArrayList32()
             : base()

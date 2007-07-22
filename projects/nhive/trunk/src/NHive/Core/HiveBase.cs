@@ -16,11 +16,6 @@ namespace NHive.Core
         #region Fields
 
         /// <summary>
-        /// The current collection version
-        /// </summary>
-        private long _revision = 0;
-
-        /// <summary>
         /// The item equalityComparer of the collection
         /// </summary>
         protected readonly IEqualityComparer<T> ItemEqualityComparer;
@@ -75,9 +70,9 @@ namespace NHive.Core
 
         #region Public methods - GetEnumerator
 
-        public Range<T, TSize, TIterator>.Enumerator GetEnumerator()
+        public HiveEnumerator<T, TSize, TIterator> GetEnumerator()
         {
-            return new Range<T, TSize, TIterator>(this).GetEnumerator();
+            return new HiveEnumerator<T, TSize, TIterator>(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -100,38 +95,6 @@ namespace NHive.Core
             {
                 throw new NotSupportedException("Hive is readonly.");
             }
-        }
-
-        #endregion
-
-        #region Protected internal methods - Version management
-
-        public long Revision
-        {
-            get { return _revision; }
-        }
-
-        protected void BeginRevision()
-        {
-            ThrowIfReadOnly();
-        }
-
-        protected void EndRevision()
-        {
-            _revision++;
-        }
-
-        /// <summary>
-        /// Check if the collection has been modified since a specified revision.
-        /// </summary>
-        /// <param name="revision">The revision that will be compared to the 
-        /// current revision of the collection.</param>
-        /// <exception cref="HiveModifiedException">The revision of this collection is greater than
-        /// <paramref name="sinceRevision"/>.</exception>
-        protected internal void ThrowIfModifiedSince(int revision)
-        {
-            if (_revision > revision)
-                throw new HiveModifiedException();
         }
 
         #endregion

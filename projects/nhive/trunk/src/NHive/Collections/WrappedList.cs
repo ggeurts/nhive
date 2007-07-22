@@ -2,8 +2,11 @@ namespace NHive
 {
     using System.Collections.Generic;
     using NHive.Core;
+    using NHive.Core.Size;
 
-    public class WrappedList<T>: ListBase32<T>
+    public class WrappedList<T>
+        : ListBase<T, int, Int32Operations>
+        , IList<T>
     {
         #region Fields
 
@@ -55,17 +58,6 @@ namespace NHive
         {
             position = this.End;
             _innerList.Add(item);
-        }
-
-        protected override void OnAddRange<TInputSize, TInput>(
-            ref TInput nextInRange, TInput endOfRange, out Range<T, int, Iterator> addedItems)
-        {
-            Iterator addedBegin = End;
-            for (; !nextInRange.Equals(endOfRange); nextInRange.Increment())
-            {
-                _innerList.Add(nextInRange.Read());
-            }
-            addedItems = new Range<T, int, Iterator>(addedBegin, End);
         }
 
         protected override void OnInsert(Iterator position, T item)

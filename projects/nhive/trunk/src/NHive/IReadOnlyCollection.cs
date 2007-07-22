@@ -10,7 +10,7 @@ namespace NHive
     /// <typeparam name="T">The type of items stored in the hive.</typeparam>
     /// <typeparam name="TSize">The integer type used to measure the hive size.</typeparam>
     /// <seealso cref="IHive{T}"/>
-    public interface IBufferedHive<T, TSize>
+    public interface IReadOnlyCollection<T, TSize>
         : IHive<T, TSize>
         where TSize : struct, IConvertible
     {
@@ -30,14 +30,14 @@ namespace NHive
 
     /// <summary>
     /// The interface to be implemented by buffered hives that support iteration. 
-    /// See <see cref="IBufferedHive{T, TSize}"/> for more information on buffered hives.
+    /// See <see cref="IReadOnlyCollection{T, TSize}"/> for more information on buffered hives.
     /// </summary>
     /// <typeparam name="T">The type of items stored in the hive.</typeparam>
     /// <typeparam name="TSize">The integer type used to measure the hive size.</typeparam>
     /// <typeparam name="TIterator">The type of iterators for the hive.</typeparam>
-    public interface IBufferedHive<T, TSize, TIterator> 
+    public interface IReadOnlyCollection<T, TSize, TIterator> 
         : IHive<T, TSize, TIterator>
-        , IBufferedHive<T, TSize>
+        , IReadOnlyCollection<T, TSize>
         where TIterator : struct, IForwardIterator<T, TSize, TIterator>
         where TSize : struct, IConvertible
     { }

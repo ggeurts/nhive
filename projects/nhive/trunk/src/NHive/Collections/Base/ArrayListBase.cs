@@ -1,11 +1,8 @@
 namespace NHive.Collections.Base
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using NHive.Core;
-    using NHive.Core.Events;
 
     public class ArrayListBase<T, TSize, TSizeOperations> 
         : ListBase<T, TSize, TSizeOperations>
@@ -86,7 +83,7 @@ namespace NHive.Collections.Base
 
         public override TSize IndexOf(T item)
         {
-            for (TSize i = Size.Zero; !Size.Equals(_count); Size.Increment(ref i))
+            for (TSize i = Size.Zero; Size.Compare(i, _count) < 0; Size.Increment(ref i))
             {
                 if (ItemEqualityComparer.Equals(item, Size.GetValueFromArray<T>(_innerArray, i)))
                 {
@@ -107,13 +104,6 @@ namespace NHive.Collections.Base
             TSize index = position.Key;
             EnsureSpaceExists(index, Size.Add(index, 1));
             Size.SetValueInArray(_innerArray, item, index);
-        }
-
-        protected override void OnAddRange<TInputSize, TInput>(
-            ref TInput nextInRange, TInput endOfRange, out Range<T, TSize, Iterator> addedItems)
-        {
-            OnInsertRange(End, new Range<T, TInputSize, TInput>(nextInRange, endOfRange), out addedItems);
-            nextInRange = endOfRange;
         }
 
         protected override void OnInsert(Iterator position, T item)
@@ -144,8 +134,8 @@ namespace NHive.Collections.Base
             }
             else
             {
-                BufferedStream<T, TSize, TSizeOperations> snapshot =
-                    BufferedStream<T, TSize, TSizeOperations>.Create(range);
+                StreamBuffer<T, TSize, TSizeOperations> snapshot =
+                    StreamBuffer<T, TSize, TSizeOperations>.Create(range);
                 endIndex = Size.Add(beginIndex, snapshot.Count);
 
                 if (Size.Compare(snapshot.Count, Size.Zero) > 0)

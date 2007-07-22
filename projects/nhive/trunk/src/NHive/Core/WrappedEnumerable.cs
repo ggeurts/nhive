@@ -5,7 +5,7 @@ namespace NHive.Core
     using NHive.Core;
 
     internal sealed class WrappedEnumerable<T, TSize, TSizeOperations> 
-        : StreamedHiveBase<T, TSize, TSizeOperations>
+        : StreamBase<T, TSize, TSizeOperations>
         where TSize: struct, IConvertible
         where TSizeOperations: ISizeOperations<TSize>, new()
     {

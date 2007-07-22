@@ -4,7 +4,7 @@ namespace NHive
     using System.Collections.Generic;
 
     public interface ICollection<T, TSize>
-        : IBufferedHive<T, TSize>
+        : IReadOnlyCollection<T, TSize>
         where TSize : struct, IConvertible
     {
         /// <summary>
@@ -18,4 +18,11 @@ namespace NHive
         void Clear();
         bool Remove(T item);
     }
+
+    public interface ICollection<T, TSize, TIterator>
+        : IReadOnlyCollection<T, TSize, TIterator>
+        , ICollection<T, TSize>
+        where TSize : struct, IConvertible
+        where TIterator: struct, IForwardIterator<T, TSize, TIterator>
+    { }
 }

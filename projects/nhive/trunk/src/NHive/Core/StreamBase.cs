@@ -3,8 +3,8 @@ namespace NHive.Core
     using System;
     using System.Collections.Generic;
 
-    public abstract class StreamedHiveBase<T, TSize, TSizeOperations>
-        : HiveBase<T, TSize, TSizeOperations, StreamedHiveBase<T, TSize, TSizeOperations>.Iterator>
+    public abstract class StreamBase<T, TSize, TSizeOperations>
+        : HiveBase<T, TSize, TSizeOperations, StreamBase<T, TSize, TSizeOperations>.Iterator>
         where TSize: struct, IConvertible
         where TSizeOperations : ISizeOperations<TSize>, new()
     {
@@ -13,7 +13,7 @@ namespace NHive.Core
         private T _value;
         bool _isBof;
 
-        protected StreamedHiveBase(IEqualityComparer<T> itemEqualityComparer)
+        protected StreamBase(IEqualityComparer<T> itemEqualityComparer)
             : base(itemEqualityComparer)
         {
             _isBof = true;
@@ -72,10 +72,10 @@ namespace NHive.Core
 
         public struct Iterator: IInputIterator<T, TSize, Iterator>
         {
-            private StreamedHiveBase<T, TSize, TSizeOperations> _parent;
+            private StreamBase<T, TSize, TSizeOperations> _parent;
             private bool _isEnd;
 
-            internal Iterator(StreamedHiveBase<T, TSize, TSizeOperations> parent, bool isEnd)
+            internal Iterator(StreamBase<T, TSize, TSizeOperations> parent, bool isEnd)
             {
                 _parent = parent;
                 _isEnd = isEnd;

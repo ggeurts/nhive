@@ -4,7 +4,7 @@ namespace NHive.Core
     using System.Collections.Generic;
 
     public abstract class ListBase<T, TSize, TSizeOperations>
-        : RandomAccessHiveBase<T, TSize, TSizeOperations>
+        : RandomAccessCollectionBase<T, TSize, TSizeOperations>
         , IList<T, TSize>
         where TSize : struct, IConvertible
         where TSizeOperations : ISizeOperations<TSize>, new()
@@ -39,6 +39,15 @@ namespace NHive.Core
                 position = default(Iterator);
                 return false;
             }
+        }
+
+        #endregion
+
+        #region Add operations
+
+        protected internal override void AddRange<TInputSize, TInput>(IHive<T, TInputSize, TInput> itemsToAdd)
+        {
+            InsertRange(Count, itemsToAdd);
         }
 
         #endregion
@@ -102,15 +111,6 @@ namespace NHive.Core
             (Iterator insertBegin, IHive<T, TInputSize, TInput> range, out Range<T, TSize, Iterator> insertedRange)
             where TInput : struct, IInputIterator<T, TInputSize, TInput>
             where TInputSize : struct, IConvertible;
-
-        #endregion
-
-        #region Remove operations
-
-        public void RemoveAt(TSize index)
-        {
-            base.RemoveAt(new Iterator(this, index));
-        }
 
         #endregion
     }
