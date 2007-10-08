@@ -1,4 +1,4 @@
-namespace NHive.NUnitExtensions
+namespace NHive.NUnitExtensions.Framework
 {
     using System;
     using NUnit.Core;

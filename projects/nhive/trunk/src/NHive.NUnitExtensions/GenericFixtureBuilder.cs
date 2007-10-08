@@ -4,6 +4,7 @@ namespace NHive.NUnitExtensions
     using System.Reflection;
     using NUnit.Core.Extensibility;
     using NUnit.Core;
+    using NHive.NUnitExtensions.Framework;
     using NHive.NUnitExtensions.Proxies;
 
     /// <summary>

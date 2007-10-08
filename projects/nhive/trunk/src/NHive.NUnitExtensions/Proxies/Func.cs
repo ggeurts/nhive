@@ -1,6 +1,6 @@
 namespace NHive.NUnitExtensions.Proxies
 {
-    public delegate R Func<R>();
-    public delegate R Func<R, X>(X x);
-    public delegate R Func<R, X, Y>(X x, Y y);
+    internal delegate R Func<R>();
+    internal delegate R Func<R, X>(X x);
+    internal delegate R Func<R, X, Y>(X x, Y y);
 }

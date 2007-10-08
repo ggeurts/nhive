@@ -90,10 +90,10 @@
     <Compile Include="AddIn.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GenericFixtureAttribute.cs" />
+    <Compile Include="Framework\GenericFixtureAttribute.cs" />
     <Compile Include="GenericFixtureBuilder.cs" />
     <Compile Include="Framework\GenericFixturePatternAttribute.cs" />
-    <Compile Include="IGenericFixture.cs" />
+    <Compile Include="Framework\IGenericFixture.cs" />
     <Compile Include="NUnitType.cs" />
     <Compile Include="Proxies\Func.cs" />
     <Compile Include="Proxies\Proc.cs" />
