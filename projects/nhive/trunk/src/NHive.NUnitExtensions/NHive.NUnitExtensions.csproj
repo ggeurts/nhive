@@ -92,7 +92,9 @@
     </Compile>
     <Compile Include="GenericFixtureAttribute.cs" />
     <Compile Include="GenericFixtureBuilder.cs" />
-    <Compile Include="NUnitTypes.cs" />
+    <Compile Include="Framework\GenericFixturePatternAttribute.cs" />
+    <Compile Include="IGenericFixture.cs" />
+    <Compile Include="NUnitType.cs" />
     <Compile Include="Proxies\Func.cs" />
     <Compile Include="Proxies\Proc.cs" />
     <Compile Include="Proxies\SuiteBuildersProxy.cs" />

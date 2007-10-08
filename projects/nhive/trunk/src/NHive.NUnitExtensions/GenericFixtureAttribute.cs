@@ -1,6 +1,7 @@
 namespace NHive.NUnitExtensions
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Specifies type arguments for a generic test fixture. A generic test fixture
@@ -9,19 +10,18 @@ namespace NHive.NUnitExtensions
     /// <see cref="GenericFixtureAttribute" /> one closed generic
     /// test fixture type will be generated.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class GenericFixtureAttribute : Attribute
+    public class GenericFixtureAttribute : GenericFixturePatternAttribute
     {
-        private Type[] _genericTypeArgs;
+        public readonly Type[] GenericTypeArgs;
 
         public GenericFixtureAttribute(params Type[] genericTypeArgs)
         {
-            _genericTypeArgs = genericTypeArgs ?? Type.EmptyTypes;
+            this.GenericTypeArgs = genericTypeArgs ?? Type.EmptyTypes;
         }
 
-        public Type[] GenericTypeArguments
+        public override void BuildFixtures(IGenericFixture fixture)
         {
-            get { return _genericTypeArgs; }
+            fixture.Add(fixture.FixtureType.MakeGenericType(this.GenericTypeArgs));
         }
     }
 }

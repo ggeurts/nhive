@@ -4,6 +4,11 @@ using System.Text;
 
 namespace NHive.NUnitExtensions
 {
+    /// <summary>
+    /// Static class with late bound <see cref="Type"/> instances for
+    /// NUnit 2.4.x types to support the development of NUnit addins that
+    /// are not bound to a specific version of the NUnit assemblies.
+    /// </summary>
     internal static class NUnitType
     {
         public static class Core
