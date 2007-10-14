@@ -1,10 +1,14 @@
 namespace NHive.NUnitExtensions
 {
     using System;
-    using NUnit.Core;
     using System.Collections;
     using System.Collections.Generic;
+    using NUnit.Core;
 
+    /// <summary>
+    /// NUnit <see cref="ITestFilter"/> implementation that selects tests
+    /// by their <see cref="NUnit.Core.TestID"/>.
+    /// </summary>
     public class TestIdFilter : TestFilter
     {
         private readonly List<TestID> _testIDs = new List<TestID>();

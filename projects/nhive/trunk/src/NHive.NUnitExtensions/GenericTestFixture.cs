@@ -14,8 +14,8 @@ namespace NHive.NUnitExtensions
     {
         #region Fields
 
-        private Dictionary<string, GenericTestCase> _testMethodMap =
-            new Dictionary<string, GenericTestCase>();
+        private Dictionary<string, GenericTestMethod> _testMethodMap =
+            new Dictionary<string, GenericTestMethod>();
         private List<Test> _constructedFixtures = new List<Test>();
 
         #endregion
@@ -71,7 +71,7 @@ namespace NHive.NUnitExtensions
 
         private void AddTestCase(Test test)
         {
-            GenericTestCase testCase;
+            GenericTestMethod testCase;
 
             if (!_testMethodMap.TryGetValue(test.TestName.Name, out testCase))
             {
@@ -80,8 +80,8 @@ namespace NHive.NUnitExtensions
                     testMethodName, BindingFlags.Instance | BindingFlags.Public);
 
                 testCase = (testMethod == null)
-                    ? new GenericTestCase(test.TestName.Name)
-                    : new GenericTestCase(testMethod);
+                    ? new GenericTestMethod(test.TestName.Name)
+                    : new GenericTestMethod(testMethod);
                 _testMethodMap.Add(testCase.TestName.Name, testCase);
             }
 
@@ -191,7 +191,5 @@ namespace NHive.NUnitExtensions
         }
 
         #endregion
-
-
     }
 }

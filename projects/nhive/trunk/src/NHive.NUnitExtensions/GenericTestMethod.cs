@@ -13,21 +13,25 @@ namespace NHive.NUnitExtensions
     /// of test cases and the associated setup/reardown logic is the responsibility 
     /// of the test suite(s) that originally created the test cases.
     /// </summary>
-    public class GenericTestCase : Test
+    public class GenericTestMethod : Test
     {
         #region Fields
 
-        private List<Test> _childTests = new List<Test>();
+        /// <summary>
+        /// List of test methods in closed generic types that derive
+        /// from one test method in a generic test fixture definition.
+        /// </summary>
+        private List<Test> _constructedTestMethods = new List<Test>();
 
         #endregion
 
         #region Constructor(s)
 
-        public GenericTestCase(MethodInfo method)
+        public GenericTestMethod(MethodInfo method)
             : base(method)
         { }
 
-        public GenericTestCase(string name)
+        public GenericTestMethod(string name)
             : base(name)
         { }
 
@@ -35,13 +39,13 @@ namespace NHive.NUnitExtensions
 
         #region Public operations
 
-        public void Add(Test child)
+        public void Add(Test constructedTestMethod)
         {
-            if (child == null)
+            if (constructedTestMethod == null)
             {
                 throw new ArgumentNullException("child");
             }
-            _childTests.Add(child);
+            _constructedTestMethods.Add(constructedTestMethod);
         }
 
         #endregion
@@ -55,12 +59,15 @@ namespace NHive.NUnitExtensions
 
         public override int CountTestCases(ITestFilter filter)
         {
-            if (filter.Match(this)) return _childTests.Count;
+            if (filter.Match(this))
+            {
+                return _constructedTestMethods.Count;
+            }
             
             int count = 0;
-            foreach (Test childTest in _childTests)
+            foreach (Test constructedTestMethod in _constructedTestMethods)
             {
-                count += childTest.CountTestCases(filter);
+                count += constructedTestMethod.CountTestCases(filter);
             }
             return count; 
         }
@@ -82,7 +89,7 @@ namespace NHive.NUnitExtensions
 
         public override System.Collections.IList Tests
         {
-            get { return _childTests; }
+            get { return _constructedTestMethods; }
         }
 
         #endregion

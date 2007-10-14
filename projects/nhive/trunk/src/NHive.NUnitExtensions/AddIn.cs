@@ -4,7 +4,10 @@ namespace NHive.NUnitExtensions
     using NUnit.Core.Extensibility;
     using NHive.NUnitExtensions.Proxies;
     
-	[NUnitAddin(
+    /// <summary>
+    /// NUnit addin that supports running generic test fixtures.
+    /// </summary>
+    [NUnitAddin(
         Type=ExtensionType.Core,
         Name="Generic Tests Addin", 
         Description="Generates and runs test fixtures from generic type definitions.")]

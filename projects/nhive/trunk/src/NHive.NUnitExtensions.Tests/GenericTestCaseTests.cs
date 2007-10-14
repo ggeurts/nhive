@@ -11,13 +11,13 @@ namespace NHive.NUnitExtensions.Tests
     [TestFixture]
     public class GenericTestCaseTests
     {
-        private GenericTestCase _testCase;
+        private GenericTestMethod _testCase;
 
         [SetUp]
         public void SetUp()
         {
             MethodInfo testMethod = typeof(FakeTestFixture<>).GetMethod("FakeTestMethod");
-            _testCase = new GenericTestCase(testMethod);
+            _testCase = new GenericTestMethod(testMethod);
         }
 
         [Test]

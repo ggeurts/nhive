@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using System.Threading;
 
 namespace NHive.NUnitExtensions
 {
@@ -17,6 +14,9 @@ namespace NHive.NUnitExtensions
         {
             private static Assembly _assembly;
 
+            /// <summary>
+            /// NUnit.Core assembly.
+            /// </summary>
             private static Assembly NUnitAssembly
             {
                 get
@@ -28,15 +28,18 @@ namespace NHive.NUnitExtensions
                     return _assembly;
                 }
             }
-
+            /// <summary>
+            /// Late bound <see cref="NUnit.Core.TestFixtureBuilder"/> type.
+            /// </summary>
             public static readonly Type TestFixtureBuilder = 
                 NUnitAssembly.GetType("NUnit.Core.TestFixtureBuilder", true);
-            public static readonly Type TestSuite = 
-                NUnitAssembly.GetType("NUnit.Core.TestSuite", true);
         }
 
         public static class Framework
         {
+            /// <summary>
+            /// Late bound <see cref="NUnit.Framework.TestFixtureAttribute"/> type.
+            /// </summary>
             public static readonly Type TestFixtureAttribute = 
                 Type.GetType("NUnit.Framework.TestFixtureAttribute, NUnit.Framework", true);
         }
@@ -48,12 +51,6 @@ namespace NHive.NUnitExtensions
             {
                 if (StringComparer.InvariantCultureIgnoreCase.Equals(assembly.GetName().Name, simpleName))
                 {
-                    //if (result != null)
-                    //{
-                    //    throw new ArgumentException(string.Format(
-                    //        "AppDomain contains multiple assemblies with name '{0}'.",
-                    //        simpleName));
-                    //}
                     result = assembly;
                     break;
                 }

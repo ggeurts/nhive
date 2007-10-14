@@ -99,7 +99,7 @@
     <Compile Include="GenericFixtureBuilder.cs" />
     <Compile Include="Framework\GenericFixturePatternAttribute.cs" />
     <Compile Include="Framework\IGenericFixture.cs" />
-    <Compile Include="GenericTestCase.cs" />
+    <Compile Include="GenericTestMethod.cs" />
     <Compile Include="GenericTestFixture.cs" />
     <Compile Include="NUnitType.cs" />
     <Compile Include="Proxies\Func.cs" />

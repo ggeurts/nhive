@@ -6,9 +6,9 @@ namespace NHive.NUnitExtensions
     using NHive.NUnitExtensions.Framework;
 
     /// <summary>
-    /// NUnit addin that builds test fixtures from generic test fixture definitions.
+    /// NUnit suite builder extension that builds test fixtures from generic test fixture definitions.
     /// A generic test fixture definition is a generic type definition that is decoared
-    /// with one or more <see cref="GenericFixtureAttribute"/>s.
+    /// with one or more attributes that derive from <see cref="GenericFixturePatternAttribute"/>s.
     /// </summary>
     public class GenericFixtureBuilder : ISuiteBuilder
     {
@@ -17,8 +17,7 @@ namespace NHive.NUnitExtensions
         public bool CanBuildFrom(Type type)
         {
             return type.IsGenericTypeDefinition
-                && type.IsDefined(typeof(GenericFixturePatternAttribute), false)
-                && type.IsDefined(NUnitType.Framework.TestFixtureAttribute, false);
+                && type.IsDefined(typeof(GenericFixturePatternAttribute), false);
         }
 
         public Test BuildFrom(Type type)
