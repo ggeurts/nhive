@@ -74,6 +74,11 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\nunit\current\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.core.interfaces">
       <Name>nunit.core.interfaces</Name>
       <HintPath>..\..\vendor\nunit\current\nunit.core.interfaces.dll</HintPath>
@@ -94,12 +99,14 @@
     <Compile Include="GenericFixtureBuilder.cs" />
     <Compile Include="Framework\GenericFixturePatternAttribute.cs" />
     <Compile Include="Framework\IGenericFixture.cs" />
+    <Compile Include="GenericTestCase.cs" />
+    <Compile Include="GenericTestFixture.cs" />
     <Compile Include="NUnitType.cs" />
     <Compile Include="Proxies\Func.cs" />
     <Compile Include="Proxies\Proc.cs" />
     <Compile Include="Proxies\SuiteBuildersProxy.cs" />
     <Compile Include="Proxies\TestFixtureBuilderProxy.cs" />
-    <Compile Include="Proxies\TestSuiteProxy.cs" />
+    <Compile Include="TestIdFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Install.bat" />

@@ -52,12 +52,18 @@
   <ItemGroup>
     <Compile Include="AddInTests.cs" />
     <Compile Include="GenericFixtureBuilderTests.cs" />
+    <Compile Include="GenericTestCaseTests.cs" />
+    <Compile Include="GenericTestFixtureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NHive.NUnitExtensions\NHive.NUnitExtensions.csproj">
       <Project>{EF428E5B-B3E7-4C2F-B005-98DE7D6E7CDB}</Project>
       <Name>NHive.NUnitExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="GenericTestsAssembly\GenericTestsAssembly.csproj">
+      <Project>{2E6FE42B-A012-47E3-A80B-8BE921B47F48}</Project>
+      <Name>GenericTestsAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

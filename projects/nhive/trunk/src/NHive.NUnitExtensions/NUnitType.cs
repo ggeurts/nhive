@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
+using System.Threading;
 
 namespace NHive.NUnitExtensions
 {
@@ -13,16 +15,58 @@ namespace NHive.NUnitExtensions
     {
         public static class Core
         {
+            private static Assembly _assembly;
+
+            private static Assembly NUnitAssembly
+            {
+                get
+                {
+                    if (_assembly == null)
+                    {
+                        _assembly = GetLoadedAssembly("NUnit.Core");
+                    }
+                    return _assembly;
+                }
+            }
+
             public static readonly Type TestFixtureBuilder = 
-                Type.GetType("NUnit.Core.TestFixtureBuilder, NUnit.Core");
+                NUnitAssembly.GetType("NUnit.Core.TestFixtureBuilder", true);
             public static readonly Type TestSuite = 
-                Type.GetType("NUnit.Core.TestSuite, NUnit.Core");
+                NUnitAssembly.GetType("NUnit.Core.TestSuite", true);
         }
 
         public static class Framework
         {
             public static readonly Type TestFixtureAttribute = 
-                Type.GetType("NUnit.Framework.TestFixtureAttribute, NUnit.Framework");
+                Type.GetType("NUnit.Framework.TestFixtureAttribute, NUnit.Framework", true);
+        }
+
+        private static Assembly GetLoadedAssembly(string simpleName)
+        {
+            Assembly result = null;
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (StringComparer.InvariantCultureIgnoreCase.Equals(assembly.GetName().Name, simpleName))
+                {
+                    //if (result != null)
+                    //{
+                    //    throw new ArgumentException(string.Format(
+                    //        "AppDomain contains multiple assemblies with name '{0}'.",
+                    //        simpleName));
+                    //}
+                    result = assembly;
+                    break;
+                }
+            }
+
+            if (result == null)
+            {
+                throw new ArgumentException(string.Format(
+                    "AppDomain does not contains ssembly with name '{0}'.",
+                    simpleName));
+            }
+
+            return result;
         }
     }
 }

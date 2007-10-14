@@ -6,8 +6,8 @@ namespace NHive.NUnitExtensions
     
 	[NUnitAddin(
         Type=ExtensionType.Core,
-        Name="Generic Test Suite Addin", 
-        Description="Runs generic test suites")]
+        Name="Generic Tests Addin", 
+        Description="Generates and runs test fixtures from generic type definitions.")]
 	public class AddIn : IAddin
 	{
 		#region IAddin Members
