@@ -1,0 +1,62 @@
+# Introduction #
+
+Like the C5 collections NHive will follow an interface centric approach. This page will document the NHive collection interfaces, including how they relate to the orginal C5 collection interfaces.
+
+# Details #
+
+_**Todo:** Insert tables with C5 collection interfaces to kick off interface (re-)design process._
+
+## ICollectionValue
+
+&lt;T&gt;
+
+ ##
+A generic collection that may be enumerated and can answer efficiently how many items it contains. Like `IEnumerable<T>`, this interface does not prescribe any operations to initialize or update the collection. The main usage for this interface is to be the return type of query operations on generic collection.
+
+| **C5** | **NHive** | **Category** | **Comments** |
+|:-------|:----------|:-------------|:-------------|
+| `EventTypeEnum ListenableEvents { get;}` |  | meta | Subscribable events. |
+| `EventTypeEnum ActiveEvents { get;}` |  | events | Subscribed events. |
+| `event CollectionChangedHandler<T> CollectionChanged;` |  | events | Raised for every change. |
+| `event CollectionClearedHandler<T> CollectionCleared;` |  | events | Raised for every clear. |
+| `event ItemsAddedHandler<T> ItemsAdded;` |  | events | Raised for every individual addition. |
+| `event ItemInsertedHandler<T> ItemInserted;` |  | events | Raised for every individual insertion.|
+| `event ItemsRemovedHandler<T> ItemsRemoved;` |  | events | Raised for every individual removal. |
+| `event ItemRemovedAtHandler<T> ItemRemovedAt;` |  | events | Raised for every individual removal at specific index. |
+| `bool IsEmpty { get;}` | `bool IsEmpty { get;}` | core |  |
+| `int Count { get;}` | `int Count { get;}` | core |  |
+| `Speed CountSpeed { get;}` |  | meta | e.g. linear, logarithmic, etc. |
+| `void CopyTo(T[] array, int index);` | `void CopyTo(T[] array, int index);` | core |  |
+| `T[] ToArray();` | `T[] ToArray();` | core |  |
+| `void Apply(Act<T> action);` |  | algorithm |  |
+| `bool Exists(Fun<T, bool> predicate);` |  | algorithm |  |
+| `bool Find(Fun<T, bool> predicate, out T item);` |  | algorithm | Returns first matching item. |
+| `bool All(Fun<T, bool> predicate);` |  | algorithm |  |
+| `T Choose();`|  | algorithm | Returns arbitrary item.` |
+| `SCG.IEnumerable<T> Filter(Fun<T, bool> filter);` |  | algorithm |  |
+
+## IDirectedCollectionValue
+
+&lt;T&gt;
+
+ ##
+A sized generic collection, that can be enumerated backwards.
+| **C5** | **NHive** | **Category** | **Comments** |
+|:-------|:----------|:-------------|:-------------|
+| `IDirectedCollectionValue<T> Backwards();` |  | enumeration |  |
+| `bool FindLast(Fun<T, bool> predicate, out T item);` |  | algorithm |  |
+
+## IExtensible
+
+&lt;T&gt;
+
+ ##
+A generic collection to which one may add items. This is just the intersection of the main stream generic collection interfaces and the priority queue interface.
+| **C5** | **NHive** | **Category** | **Comments** |
+|:-------|:----------|:-------------|:-------------|
+| `bool AllowsDuplicates { get;}` |  | meta | true = set semantics; false = bag semantics |
+| `SCG.IEqualityComparer<T> EqualityComparer {get;}` |  | meta | Equality comparer used to check equality of items. Or null (?) if collection does not check equality at all or uses a comparer. |
+| `bool DuplicatesByCounting { get;}` |  | meta | True if only one representative of a group of equal items is kept in the collection together with the total count. |
+| `bool Add(T item);` | `bool Add(T item);` | core | Attempts to add an item. If collection has set semantics, the item will be added if not already present. If bag semantics, the item will always be added. |
+| `void AddAll<U>(SCG.IEnumerable<U> items) where U : T;` |  | algorithm | Adds items from another collection with more specialized item type. If this collection has set semantics, only items not already in the collection will be added. |
+| `bool Check();` |  | invariant | Invariant check intended for development purposes |

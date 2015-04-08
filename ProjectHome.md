@@ -1,0 +1,7 @@
+When starting out in 2007, NHive was intended to become a new .NET Collection Library, using the [C5 Collections](http://www.itu.dk/research/c5/) library (version 1.0.1) as a starting point and released under a more liberal licence than the original [PowerCollections](http://www.wintellect.com/PowerCollections.aspx) collections library license.
+
+Since that time the PowerCollections library has been released under a much more liberal license [on CodePlex](http://powercollections.codeplex.com) and the [NGenerics](http://ngenerics.codeplex.com/) project has come up as another feasible .NET collections alternative with a liberal license. Therefore, the main incentive to spend time on this project no longer exists.
+
+The code in this project may still be of interest to the following groups of developers:
+  * For C5 Collection users and/or evaluators that are looking for C5 dictionary implementations that support the standard [System.Collections.Generic.IDictionary](http://msdn2.microsoft.com/en-us/library/s4ys34ea.aspx) interface, the code will remain available in the Subversion repository (http://nhive.googlecode.com/svn/projects/c5/tags/C5-2.0.0-alpha1/).
+  * For people who like to experiment with the use of STL-like algorithms in .NET, this project contains an (early) attempt to integrate results of the [CSTL](http://sourceforge.net/projects/cstl/) project.
